@@ -47,7 +47,7 @@ class Body extends StatelessWidget {
               textStyle: const TextStyle(fontSize: 20),
             ),
             onPressed: () {},
-            child: const Text("LOGIN"),
+            child: const Text("LOGIN LOGIN"),
           )
         ],
       ),
