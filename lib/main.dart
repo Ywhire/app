@@ -49,7 +49,7 @@ class Body extends StatelessWidget {
             width: size.width * 0.8,
             child: ClipRRect(
               borderRadius:
-              BorderRadius.circular(29), // How much circularity we want
+                  BorderRadius.circular(29), // How much circularity we want
               child: TextButton(
                 style: TextButton.styleFrom(
                   padding: const EdgeInsets.all(16.0),
@@ -57,12 +57,7 @@ class Body extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 20),
                   backgroundColor: Colors.lightGreen,
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                },
+                onPressed: () {},
                 child: const Text("LOGIN"),
               ),
             ),
@@ -105,7 +100,7 @@ class Background extends StatelessWidget {
       height: size.height,
       width: double.infinity,
       child: Stack(
-        alignment: Alignment.center,
+        alignment: Alignment.bottomCenter,
         children: <Widget>[
           child,
         ],
@@ -113,51 +108,3 @@ class Background extends StatelessWidget {
     );
   }
 }
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Diet Master')),
-      body: Center(child: Text('My Page!')),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Diet Master'),
-            ),
-            ListTile(
-              title: Text('Profile'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('My Kitchen'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Calendar'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Settings'),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
