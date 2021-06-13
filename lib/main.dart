@@ -38,17 +38,47 @@ class Body extends StatelessWidget {
         children: <Widget>[
           Text(
             "Welcome to the App",
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              padding: const EdgeInsets.all(16.0),
-              primary: Colors.blueGrey,
-              textStyle: const TextStyle(fontSize: 20),
+          SizedBox(
+            height: size.height * 0.6,
+          ),
+          Container(
+            // Login button
+            margin: EdgeInsets.symmetric(vertical: 20.0),
+            width: size.width * 0.8,
+            child: ClipRRect(
+              borderRadius:
+                  BorderRadius.circular(29), // How much circularity we want
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16.0),
+                  primary: Colors.black,
+                  textStyle: const TextStyle(fontSize: 20),
+                  backgroundColor: Colors.lightGreen,
+                ),
+                onPressed: () {},
+                child: const Text("LOGIN"),
+              ),
             ),
-            onPressed: () {},
-            child: const Text("LOGIN"),
-          )
+          ),
+          Container(
+            // Sign up Button
+            width: size.width * 0.8,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(29),
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.all(16.0),
+                  primary: Colors.black,
+                  textStyle: const TextStyle(fontSize: 20),
+                  backgroundColor: Colors.blue,
+                ),
+                onPressed: () {},
+                child: const Text("SIGN UP"),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -70,7 +100,7 @@ class Background extends StatelessWidget {
       height: size.height,
       width: double.infinity,
       child: Stack(
-        alignment: Alignment.center,
+        alignment: Alignment.bottomCenter,
         children: <Widget>[
           child,
         ],
