@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import "package:app/main.dart";
-import 'package:app/background.dart';
-import 'package:app/homePage.dart';
+import 'package:app/module/welcome/background.dart';
+import 'package:app/module/home/homePage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -54,12 +53,7 @@ class Body extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 20),
                   backgroundColor: Colors.blue,
                 ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => SignUpPage()),
-                  );
-                },
+                onPressed: () {},
                 child: const Text("SIGN UP"),
               ),
             ),
