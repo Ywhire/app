@@ -78,7 +78,13 @@ class Body extends StatelessWidget {
                 child: const Text("SIGN UP"),
               ),
             ),
+<<<<<<< HEAD
           ),
+=======
+            onPressed: () {},
+            child: const Text("LOGIN LOGIN"),
+          )
+>>>>>>> 3d32c12db514ebc3aaa18ab354b0b99914043835
         ],
       ),
     );
