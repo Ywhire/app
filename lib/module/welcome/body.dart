@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD:lib/body.dart
-import 'signUpPage.dart';
-import 'package:app/background.dart';
-import 'package:app/homePage.dart';
-=======
 import 'package:app/module/welcome/background.dart';
 import 'package:app/module/home/homePage.dart';
->>>>>>> daedf4afcdc122845a13b20fe6ae81ffc445aa9e:lib/module/welcome/body.dart
 
 class Body extends StatelessWidget {
   @override
