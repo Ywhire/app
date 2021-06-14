@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "package:app/main.dart";
+import 'signUpPage.dart';
 import 'package:app/background.dart';
 import 'package:app/homePage.dart';
 
