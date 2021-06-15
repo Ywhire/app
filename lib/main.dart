@@ -1,3 +1,4 @@
+import 'package:app/module/calendar/calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:app/routes/Routes.dart';
 import 'package:app/module/home/homePage.dart';
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         Routes.home: (context) => HomePage(),
         Routes.myprofile: (context) => MyProfilePage(),
         Routes.mykitchen: (context) => MyKitchenPage(),
-        Routes.calendar: (context) => CalendarPage(),
+        Routes.calendar: (context) => Calendar(),
         Routes.settings: (context) => SettingsPage(),
       },
     );
