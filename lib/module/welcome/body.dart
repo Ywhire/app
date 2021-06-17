@@ -1,6 +1,7 @@
+import 'package:app/loginPage.dart';
+import 'package:app/signUpPage.dart';
 import 'package:flutter/material.dart';
 import 'package:app/module/welcome/background.dart';
-import 'package:app/module/home/homePage.dart';
 
 class Body extends StatelessWidget {
   @override
@@ -34,7 +35,7 @@ class Body extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => LoginPage()),
                   );
                 },
                 child: const Text("LOGIN"),
@@ -53,7 +54,12 @@ class Body extends StatelessWidget {
                   textStyle: const TextStyle(fontSize: 20),
                   backgroundColor: Colors.blue,
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignUpPage()),
+                  );
+                },
                 child: const Text("SIGN UP"),
               ),
             ),
