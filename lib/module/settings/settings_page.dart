@@ -1,3 +1,4 @@
+import 'package:app/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widget/drawer.dart';
 
@@ -11,6 +12,33 @@ class SettingsPage extends StatelessWidget {
           title: Text("Settings"),
         ),
         drawer: SideDrawer(),
-        body: Center(child: Text("Settings")));
+        body: Center(
+            child: Column (
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+              Row(
+                children: <Widget>[
+                RectanText(text: "Change Profile ", color: Colors.white)
+                ],
+              ),
+                Row(
+                  children: <Widget>[
+                    RectanText(text: "Delete Account", color: Colors.white)
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    RectanText(text: " Change Account", color: Colors.white)
+                  ],
+                ),
+                Row(
+                  children: <Widget>[
+                    RectanText(text: "Quit Account", color: Colors.white)
+                  ],
+                ),
+              ],
+            ),
+        )
+    );
   }
 }

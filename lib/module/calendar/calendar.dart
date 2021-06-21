@@ -1,7 +1,7 @@
-
 import 'package:app/module/calendar/event.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:app/widget/drawer.dart';
 
 class Calendar extends StatefulWidget {
   @override
@@ -39,12 +39,13 @@ class _CalendarState extends State<Calendar> {
         title: Text("Calendar"),
         centerTitle: true,
       ),
+      drawer: SideDrawer(),
       body: Column(
         children: [
           TableCalendar(
             focusedDay: selectedDay,
-            firstDay: DateTime(1990),
-            lastDay: DateTime(2050),
+            firstDay: DateTime(2000),
+            lastDay: DateTime(2100),
             calendarFormat: format,
             onFormatChanged: (CalendarFormat _format) {
               setState(() {
@@ -105,7 +106,7 @@ class _CalendarState extends State<Calendar> {
             ),
           ),
           ..._getEventsfromDay(selectedDay).map(
-                (Event event) => ListTile(
+            (Event event) => ListTile(
               title: Text(
                 event.title,
               ),
@@ -130,7 +131,6 @@ class _CalendarState extends State<Calendar> {
                 child: Text("Ok"),
                 onPressed: () {
                   if (_eventController.text.isEmpty) {
-
                   } else {
                     if (selectedEvents[selectedDay] != null) {
                       selectedEvents[selectedDay].add(
@@ -141,11 +141,10 @@ class _CalendarState extends State<Calendar> {
                         Event(title: _eventController.text)
                       ];
                     }
-
                   }
                   Navigator.pop(context);
                   _eventController.clear();
-                  setState((){});
+                  setState(() {});
                   return;
                 },
               ),

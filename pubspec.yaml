@@ -35,6 +35,9 @@ dependencies:
   intl: ^0.17.0
   #state management
   provider: ^5.0.0
+  #profile icons
+  flutter_vector_icons: ^0.2.1
+
 
 dev_dependencies:
   flutter_test:
