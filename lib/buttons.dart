@@ -3,15 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:app/module/home/homePage.dart';
 
 class PlusButton extends StatelessWidget {
+  final Function press;
+  const PlusButton({Key key, this.press}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => NavigatorMeals()),
-        );
-      },
+      onPressed: press,
       child: Icon(Icons.add, color: Colors.white),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
@@ -25,8 +23,9 @@ class PlusButton extends StatelessWidget {
 class RectanText extends StatelessWidget {
   final String text;
   final Color color;
-
-  const RectanText({Key key, @required this.text, @required this.color})
+  final Function press;
+  const RectanText(
+      {Key key, @required this.text, @required this.color, this.press})
       : super(key: key);
 
   @override
@@ -44,7 +43,7 @@ class RectanText extends StatelessWidget {
             textStyle: const TextStyle(fontSize: 20),
             backgroundColor: color,
           ),
-          onPressed: () {},
+          onPressed: press,
           child: Text(text),
         ),
       ),
