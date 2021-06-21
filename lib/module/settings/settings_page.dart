@@ -18,22 +18,22 @@ class SettingsPage extends StatelessWidget {
               children: [
               Row(
                 children: <Widget>[
-                RectanText(text: "Change Profile ", color: Colors.white)
+                RectanText(text: "Change Profile ", color: Colors.orange)
                 ],
               ),
                 Row(
                   children: <Widget>[
-                    RectanText(text: "Delete Account", color: Colors.white)
+                    RectanText(text: "Delete Account", color: Colors.orange)
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    RectanText(text: " Change Account", color: Colors.white)
+                    RectanText(text: " Notifiction", color: Colors.orange)
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    RectanText(text: "Quit Account", color: Colors.white)
+                    RectanText(text: "Quit Account", color: Colors.orange)
                   ],
                 ),
               ],

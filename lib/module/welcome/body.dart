@@ -12,11 +12,11 @@ class Body extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Welcome to the App",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            "Welcome \nto the \nDiet Master",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 50, color : Colors.orangeAccent),
           ),
           SizedBox(
-            height: size.height * 0.6,
+            height: size.height * 0.3,
           ),
           Container(
             // Login button
@@ -30,7 +30,7 @@ class Body extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   primary: Colors.black,
                   textStyle: const TextStyle(fontSize: 20),
-                  backgroundColor: Colors.lightGreen,
+                  backgroundColor: Colors.amber,
                 ),
                 onPressed: () {
                   Navigator.push(
@@ -53,7 +53,7 @@ class Body extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   primary: Colors.black,
                   textStyle: const TextStyle(fontSize: 20),
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Colors.amber,
                 ),
                 onPressed: () {
                   Navigator.push(
