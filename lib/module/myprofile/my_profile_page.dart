@@ -1,7 +1,6 @@
+import 'package:app/widget/drawer.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-
 
 
 class MyProfilePage  extends StatelessWidget {
@@ -11,23 +10,13 @@ class MyProfilePage  extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Colors.orange,
-                Colors.orange,
-              ],
-              begin: FractionalOffset.bottomCenter,
-              end: FractionalOffset.topCenter,
-            ),
+
+    return Scaffold(
+          appBar: AppBar(
+            title: Text("My Profile"),
           ),
-        ),
-        Scaffold(
-          backgroundColor: Colors.transparent,
+        drawer: SideDrawer(),
+          backgroundColor : Colors.amber,
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             child: Padding(
@@ -37,15 +26,7 @@ class MyProfilePage  extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
-                        AntDesign.arrowleft,
-                        color: Colors.white,
-                      ),
-                      Icon(
-                        AntDesign.logout,
-                        color: Colors.white,
-                      ),
-                    ],
+                      ],
                   ),
                   SizedBox(
                     height: 20,
@@ -54,9 +35,9 @@ class MyProfilePage  extends StatelessWidget {
                     'My Profile',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 34,
-                      fontFamily: 'Nisebuschgardens',
+                      fontFamily: 'Times New Roman',
                     ),
                   ),
                   SizedBox(
@@ -247,8 +228,7 @@ class MyProfilePage  extends StatelessWidget {
               ),
             ),
           ),
-        )
-      ],
-    );
+        );
+
   }
 }

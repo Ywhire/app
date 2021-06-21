@@ -2,10 +2,13 @@
 import 'package:app/module/calendar/event.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:app/widget/drawer.dart';
+
 
 class Calendar extends StatefulWidget {
   @override
   _CalendarState createState() => _CalendarState();
+
 }
 
 class _CalendarState extends State<Calendar> {
@@ -38,7 +41,9 @@ class _CalendarState extends State<Calendar> {
       appBar: AppBar(
         title: Text("Calendar"),
         centerTitle: true,
+
       ),
+      drawer: SideDrawer(),
       body: Column(
         children: [
           TableCalendar(
