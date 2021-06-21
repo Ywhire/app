@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:app/module/home/homePage.dart';
 
 class PlusButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => NavigatorMeals()),
+        );
+      },
       child: Icon(Icons.add, color: Colors.white),
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
