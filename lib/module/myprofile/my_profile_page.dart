@@ -189,36 +189,23 @@ class MyProfilePage  extends StatelessWidget {
                           SizedBox(
                             height: 20,
                           ),
-                          Text(
-                            'List',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 27,
-                              fontFamily: 'Times New Roman',
+                          ElevatedButton(
+                            onPressed: (){},
+                            child: Text ('BMI Calculator'),
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.white.withOpacity(0.7),
+                              textStyle: TextStyle(
+                                fontSize:40,
+                                fontFamily: 'Times New Roman'
+
+                              )
                             ),
+
                           ),
                           Divider(
                             thickness: 2.5,
                           ),
-                          SizedBox(
-                            height: 10,
-                          ),
                           Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
                           ),
                         ],
                       ),
