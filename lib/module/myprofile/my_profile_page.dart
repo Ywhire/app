@@ -1,6 +1,8 @@
+import 'package:app/module/myprofile/bmiCalculatorScreen.dart';
 import 'package:app/widget/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 
 class MyProfilePage  extends StatelessWidget {
@@ -25,7 +27,7 @@ class MyProfilePage  extends StatelessWidget {
               ),
               child: Container(
                 width: double.infinity,
-                height: 350.0,
+                height: 250.0,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,7 +80,7 @@ class MyProfilePage  extends StatelessWidget {
                                     ),
                                     TextField(
                                       textAlign: TextAlign.center,
-
+                                      keyboardType: TextInputType.number,
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: Colors.black,
@@ -104,7 +106,7 @@ class MyProfilePage  extends StatelessWidget {
                                     ),
                                     TextField(
                                       textAlign: TextAlign.center,
-
+                                      keyboardType: TextInputType.number,
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: Colors.black,
@@ -154,7 +156,11 @@ class MyProfilePage  extends StatelessWidget {
             width: 300.00,
 
             child: RaisedButton(
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(context , MaterialPageRoute(
+                      builder: (context) => bmiCalculatorScreen()
+                  ));
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)
                 ),
