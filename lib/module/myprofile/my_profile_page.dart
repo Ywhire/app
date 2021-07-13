@@ -5,11 +5,24 @@ import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 
-class MyProfilePage  extends StatelessWidget {
+class MyProfilePage  extends StatefulWidget {
+  @override
+  _MyProfilePageState createState() => _MyProfilePageState();
   static const String routeName = '/myprofile';
+
+
+}
+  class _MyProfilePageState extends State<MyProfilePage>{
+
+
+  TextEditingController _NameTextEditor = TextEditingController(text: "ALİ VELİ");
+  TextEditingController _WeightTextEditor   = TextEditingController(text: "100");
+  TextEditingController _TargetTextEditor = TextEditingController(text: "80");
+
 
   @override
   Widget build(BuildContext context) {
+
     return new Scaffold(
       appBar: AppBar(
         title: Text("My Profile"),
@@ -38,12 +51,12 @@ class MyProfilePage  extends StatelessWidget {
                       SizedBox(
                         height: 10.0,
                       ),
-                      TextField(
+                      TextFormField(
+                         controller: _NameTextEditor ,
                         textAlign: TextAlign.center,
-
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(bottom: 10.0),
-                          hintText: 'Name',
+
                         ),
                         style: TextStyle(
                           fontSize: 22.0,
@@ -78,12 +91,19 @@ class MyProfilePage  extends StatelessWidget {
                                     SizedBox(
                                       height: 5.0,
                                     ),
-                                    TextField(
+                                    TextFormField(
+                                      controller: _WeightTextEditor,
                                       textAlign: TextAlign.center,
                                       keyboardType: TextInputType.number,
+
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.only(bottom: 10.0),
+                                        hintText: _WeightTextEditor.text,
+                                      ),
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: Colors.black,
+
                                       ),
                                     )
                                   ],
@@ -104,7 +124,8 @@ class MyProfilePage  extends StatelessWidget {
                                     SizedBox(
                                       height: 5.0,
                                     ),
-                                    TextField(
+                                    TextFormField(
+                                      controller: _TargetTextEditor,
                                       textAlign: TextAlign.center,
                                       keyboardType: TextInputType.number,
                                       style: TextStyle(
