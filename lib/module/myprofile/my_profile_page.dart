@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:app/module/myprofile/bmiCalculatorScreen.dart';
 import 'package:app/widget/drawer.dart';
 import 'package:flutter/material.dart';
@@ -14,12 +16,49 @@ class MyProfilePage  extends StatefulWidget {
 }
   class _MyProfilePageState extends State<MyProfilePage>{
 
+  var weight ;
+  var target;
+  var name;
 
-  TextEditingController _NameTextEditor = TextEditingController(text: "ALİ VELİ");
-  TextEditingController _WeightTextEditor   = TextEditingController(text: "100");
-  TextEditingController _TargetTextEditor = TextEditingController(text: "80");
 
+  @override
+  void initSate(){
 
+  }
+
+  Future<String> createAlertDialog(BuildContext context){
+
+    TextEditingController myController = TextEditingController();
+
+    return showDialog(context: context, builder: (context){
+      return AlertDialog(
+        title: Text("How Much?"),
+        content: TextField(
+          controller: myController,
+          keyboardType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly
+          ],
+        ),
+        actions: <Widget>[
+          MaterialButton(
+            elevation: 5.0,
+            child: Text('Cancel'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          MaterialButton(
+            elevation: 5.0,
+            child: Text('Save'),
+            onPressed: () {
+              Navigator.of(context).pop(myController.text.toString());
+            },
+          )
+        ],
+      );
+    });
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -51,9 +90,17 @@ class MyProfilePage  extends StatefulWidget {
                       SizedBox(
                         height: 10.0,
                       ),
-                      TextFormField(
-                         controller: _NameTextEditor ,
-                        textAlign: TextAlign.center,
+                      TextButton(
+                        onPressed: (){
+                          createAlertDialog(context).then((value){
+                            setState(() {
+                              name = value;
+                            });
+                          });
+                        },
+                        child: Text(name),
+
+                        /*
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.only(bottom: 10.0),
 
@@ -62,8 +109,10 @@ class MyProfilePage  extends StatefulWidget {
                           fontSize: 22.0,
                           color: Colors.black,
 
-                        ),
+                        ),*/
+
                       ),
+
                       SizedBox(
                         height: 10.0,
                       ),
@@ -91,21 +140,31 @@ class MyProfilePage  extends StatefulWidget {
                                     SizedBox(
                                       height: 5.0,
                                     ),
-                                    TextFormField(
-                                      controller: _WeightTextEditor,
-                                      textAlign: TextAlign.center,
-                                      keyboardType: TextInputType.number,
+                                    TextButton(
 
-                                      decoration: InputDecoration(
+                                      onPressed: (){
+                                        createAlertDialog(context).then((value){
+                                          setState(() {
+                                            weight = value;
+                                          });
+                                        });
+                                      },
+                                      child: Text(weight),
+
+                                      //keyboardType: TextInputType.number,
+
+                                     /* decoration: InputDecoration(
                                         contentPadding: EdgeInsets.only(bottom: 10.0),
-                                        hintText: _WeightTextEditor.text,
+                                        hintText: weight,
                                       ),
                                       style: TextStyle(
                                         fontSize: 20.0,
                                         color: Colors.black,
 
-                                      ),
+                                      ),*/
+
                                     )
+
                                   ],
                                 ),
                               ),
@@ -124,14 +183,16 @@ class MyProfilePage  extends StatefulWidget {
                                     SizedBox(
                                       height: 5.0,
                                     ),
-                                    TextFormField(
-                                      controller: _TargetTextEditor,
-                                      textAlign: TextAlign.center,
-                                      keyboardType: TextInputType.number,
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-                                      ),
+                                    TextButton(
+                                      onPressed: (){
+                                        createAlertDialog(context).then((value){
+                                          setState(() {
+                                            target = value;
+                                          });
+                                        });
+                                      },
+                                      child: Text(target),
+
                                     )
                                   ],
                                 ),
