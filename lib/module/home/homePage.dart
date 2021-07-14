@@ -1,3 +1,4 @@
+import 'package:app/authenticaiton.dart';
 import 'package:app/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widget/drawer.dart';
@@ -17,11 +18,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final Authentication _auth = Authentication();
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: AppBar(
           title: Text("Diet Master"),
+          actions: [
+            TextButton.icon(
+                onPressed: () async {
+                  await _auth.signOut();
+                },
+                icon: Icon(Icons.exit_to_app),
+                label: Text(
+                  "Signout",
+                  style: TextStyle(color: Colors.black),
+                ))
+          ],
         ),
         drawer: SideDrawer(),
         body: Center(
