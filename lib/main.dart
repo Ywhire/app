@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:app/authenticaiton.dart';
 import 'package:app/module/calendar/calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,8 +23,8 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<User>.value(
-      value: Authentication().user,
+    return StreamProvider<User>(
+      create: (_) => Authentication().user,
       initialData: null,
       child: MaterialApp(
         title: 'Flutter Demo',
@@ -48,10 +50,12 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User>(context);
-
+    log("Heloo1");
     if (firebaseUser != null) {
+      log("Heloo2");
       return HomePage();
     }
+    log("Heloo3");
     return WelcomePage();
   }
 }
