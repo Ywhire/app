@@ -1,5 +1,6 @@
 import 'package:app/authenticaiton.dart';
 import 'package:app/buttons.dart';
+import 'package:app/module/welcome/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widget/drawer.dart';
 
@@ -29,6 +30,8 @@ class _HomePageState extends State<HomePage> {
             TextButton.icon(
                 onPressed: () async {
                   await _auth.signOut();
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WelcomePage()));
                 },
                 icon: Icon(Icons.exit_to_app),
                 label: Text(

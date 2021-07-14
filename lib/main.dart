@@ -50,12 +50,11 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final firebaseUser = Provider.of<User>(context);
-    log("Heloo1");
+
     if (firebaseUser != null) {
-      log("Heloo2");
       return HomePage();
     }
-    log("Heloo3");
+
     return WelcomePage();
   }
 }
