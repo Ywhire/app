@@ -32,7 +32,6 @@ dependencies:
   syncfusion_flutter_calendar: ^19.1.66
   table_calendar: ^3.0.0
   #handle dates
-  intl: ^0.17.0
   #state management
   provider: ^5.0.0
   #profile icons
