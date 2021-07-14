@@ -1,5 +1,7 @@
+import 'package:app/module/myprofile/bmiCalculatorScreen.dart';
 import 'package:app/widget/drawer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 
@@ -8,227 +10,183 @@ class MyProfilePage  extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text("My Profile"),
+      ),
+      drawer: SideDrawer(),
+      body: Column(
+        children: <Widget>[
+          Container(
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [Colors.yellow, Colors.amber]
+                  )
+              ),
+              child: Container(
+                width: double.infinity,
+                height: 250.0,
+                child: Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
 
-    return Scaffold(
-          appBar: AppBar(
-            title: Text("My Profile"),
-          ),
-        drawer: SideDrawer(),
-          backgroundColor : Colors.amber,
-          body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 73),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    'My Profile',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 34,
-                      fontFamily: 'Times New Roman',
-                    ),
-                  ),
-                  SizedBox(
-                    height: 22,
-                  ),
-                  Container(
-                    height: height * 0.43,
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        double innerHeight = constraints.maxHeight;
-                        double innerWidth = constraints.maxWidth;
-                        return Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                height: innerHeight * 0.72,
-                                width: innerWidth,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30),
-                                  color: Colors.white,
-                                ),
+                    children: <Widget>[
+
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      TextField(
+                        textAlign: TextAlign.center,
+
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(bottom: 10.0),
+                          hintText: 'Name',
+                        ),
+                        style: TextStyle(
+                          fontSize: 22.0,
+                          color: Colors.black,
+
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Card(
+                        margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5.0),
+                        clipBehavior: Clip.antiAlias,
+                        color: Colors.white,
+                        elevation: 5.0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 22.0),
+                          child: Row(
+                            children: <Widget>[
+                              Expanded(
                                 child: Column(
-                                  children: [
-                                    SizedBox(
-                                      height: 80,
-                                    ),
+
+                                  children: <Widget>[
                                     Text(
-                                      'Name',
+                                      "Weight",
                                       style: TextStyle(
-                                        color: Colors.black87,
-                                        fontFamily: 'Times New Roman',
-                                        fontSize: 37,
+                                        color: Colors.amberAccent[700],
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     SizedBox(
-                                      height: 5,
+                                      height: 5.0,
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'Weight',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Times New Roman',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                            Text(
-                                              '120',
-                                              style: TextStyle(
-                                                color: Colors.blue,
-                                                fontFamily: 'Times New Roman',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 25,
-                                            vertical: 8,
-                                          ),
-                                          child: Container(
-                                            height: 50,
-                                            width: 3,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                              BorderRadius.circular(100),
-                                              color: Colors.grey,
-                                            ),
-                                          ),
-                                        ),
-                                        Column(
-                                          children: [
-                                            Text(
-                                              'Target',
-                                              style: TextStyle(
-                                                color: Colors.grey[700],
-                                                fontFamily: 'Nunito',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                            Text(
-                                              '100',
-                                              style: TextStyle(
-                                                color: Colors.blue,
-                                                fontFamily: 'Nunito',
-                                                fontSize: 25,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                    TextField(
+                                      textAlign: TextAlign.center,
+                                      keyboardType: TextInputType.number,
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.black,
+                                      ),
                                     )
                                   ],
                                 ),
                               ),
-                            ),
-                            Positioned(
-                              top: 110,
-                              right: 20,
-                              child: Icon(
-                                AntDesign.setting,
-                                color: Colors.grey[700],
-                                size: 30,
-                              ),
-                            ),
-                            Positioned(
-                              top: 0,
-                              left: 0,
-                              right: 0,
-                              child: Center(
-                                child: Container(
-                                  child: Image.asset(
-                                    '',
-                                    width: innerWidth * 0.45,
-                                    fit: BoxFit.fitWidth,
-                                  ),
+                              Expanded(
+                                child: Column(
+
+                                  children: <Widget>[
+                                    Text(
+                                      "Target",
+                                      style: TextStyle(
+                                        color: Colors.amberAccent[700],
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    TextField(
+                                      textAlign: TextAlign.center,
+                                      keyboardType: TextInputType.number,
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.black,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              )
+          ),
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    "BMİ:",
+                    style: TextStyle(
+                        color: Colors.amberAccent[700],
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 28.0
                     ),
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 10.0,
                   ),
-                  Container(
-                    height: height * 0.5,
-                    width: width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Text(
-                            'List',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 27,
-                              fontFamily: 'Times New Roman',
-                            ),
-                          ),
-                          Divider(
-                            thickness: 2.5,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            height: height * 0.15,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
+
                 ],
               ),
             ),
           ),
-        );
+          SizedBox(
+            height: 20.0,
+          ),
+          Container(
+            width: 300.00,
 
+            child: RaisedButton(
+                onPressed: (){
+                  Navigator.push(context , MaterialPageRoute(
+                      builder: (context) => bmiCalculatorScreen()
+                  ));
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)
+                ),
+                elevation: 0.0,
+                padding: EdgeInsets.all(0.0),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft,
+                        colors: [Colors.yellow,Colors.amber]
+                    ),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: Container(
+                    constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                    alignment: Alignment.center,
+                    child: Text("Calculator",
+                      style: TextStyle(color: Colors.black, fontSize: 26.0, fontWeight:FontWeight.bold),
+                    ),
+                  ),
+                )
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

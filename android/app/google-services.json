@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "877296086704",
+    "project_id": "diet-master-7266f",
+    "storage_bucket": "diet-master-7266f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877296086704:android:eeb02163c6f400b7fa5575",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877296086704-5vbgb9icnsopeif240ts203rmovvojo4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.app",
+            "certificate_hash": "9ddc472eb5edd3418d697b2e96dfeef5e26979a5"
+          }
+        },
+        {
+          "client_id": "877296086704-g06tggnlqbnsr3jq2hhdbcs29uqc7bmf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtgSiHDRxfeeWAixK0ykuONqsa-wPjRKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877296086704-g06tggnlqbnsr3jq2hhdbcs29uqc7bmf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

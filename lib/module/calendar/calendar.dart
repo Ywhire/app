@@ -118,7 +118,7 @@ class _CalendarState extends State<Calendar> {
         onPressed: () => showDialog(
           context: context,
           builder: (context) => AlertDialog(
-            title: Text("Add Event"),
+            title: Text("Add Diet List"),
             content: TextFormField(
               controller: _eventController,
             ),
@@ -151,7 +151,7 @@ class _CalendarState extends State<Calendar> {
             ],
           ),
         ),
-        label: Text("Add Event"),
+        label: Text("Add Diet List"),
         icon: Icon(Icons.add),
       ),
     );
