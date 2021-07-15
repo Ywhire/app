@@ -39,8 +39,10 @@ dependencies:
   firebase_core: "^0.7.0"
   firebase_auth: "^0.20.1"
   cloud_firestore: "^0.16.0"
-  
-  
+  clay_containers: ^0.3.2
+
+
+
 dependency_overrides:
   intl: ^0.17.0-nullsafety.2
 
