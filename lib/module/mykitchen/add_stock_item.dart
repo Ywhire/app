@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:app/module/foodsearchmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
@@ -20,14 +19,12 @@ class _AddStockItemState extends State<AddStockItem> {
 
   FoodData foodData;
   bool loading = true;
-  List<String> _searchList = [];
 
   Future<void> showResults(String value) async{
     var url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=aNQ649BoLEb3xRcH1J7JwPikv8rlqkLkgXmO1nL0&query=$value&dataType=Survey%20(FNDDS)";
     var response = await http.get(url);
     var decodedResponse = convert.jsonDecode(response.body);
     foodData = FoodData.fromMap(decodedResponse);
-    log(foodData.foods.length.toString());
     setState(() {
       loading = false;
     });
@@ -53,6 +50,10 @@ class _AddStockItemState extends State<AddStockItem> {
                   ),
                   controller: myController,
                   onChanged: (value) {
+                    value == ""?
+                    setState(() {
+                      loading = true;
+                    }) :
                     showResults(value);
                     },
               ),
@@ -93,9 +94,8 @@ class _AddStockItemState extends State<AddStockItem> {
                       );
                     }),
               ),
-
-    ]
-    )
+            ]
+        )
     );
   }
 
