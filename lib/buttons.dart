@@ -13,7 +13,7 @@ class PlusButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         shape: CircleBorder(),
         padding: EdgeInsets.all(20),
-        primary: Colors.amber,
+        primary: Colors.lightGreen[300],
       ),
     );
   }
