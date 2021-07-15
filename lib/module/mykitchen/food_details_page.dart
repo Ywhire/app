@@ -1,5 +1,9 @@
-import 'dart:math';
+import 'dart:async';
+import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:app/module/fooddbmodel.dart';
 import 'package:flutter/material.dart';
@@ -19,12 +23,8 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
   FoodData foodData;
   bool loading = true;
   int amount;
-
-  @override
-  void initState() {
-    fetchData();
-    super.initState();
-  }
+  String userId;
+  var uAddress;
 
   Future<void> fetchData() async {
     var url = "https://api.nal.usda.gov/fdc/v1/food/${widget.id}?api_key=aNQ649BoLEb3xRcH1J7JwPikv8rlqkLkgXmO1nL0";
@@ -32,9 +32,27 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
     var decodedResponse = convert.jsonDecode(response.body);
     foodData = FoodData.fromMap(decodedResponse);
     setState(() {
+      userId = FirebaseAuth.instance.currentUser.uid;
       amount = widget.ingredientamount;
       loading = false;
     });
+    fetchAddress();
+  }
+
+  Future<void> fetchAddress() async{
+    var document  = FirebaseFirestore.instance.collection('users').doc(userId);
+    var a = await document.get();
+    var documentData = a.data();
+    var uaddress = documentData['address'];
+    setState(() {
+      uAddress = uaddress;
+    });
+  }
+
+  Future<void> editItems() async {
+    FirebaseFirestore.instance.collection('kitchen').doc(uAddress).collection('items').doc('${widget.id}').update(
+        {'amount': amount});
+    Navigator.of(context).pop();
   }
 
   Future<String> createAlertDialog(BuildContext context){
@@ -71,6 +89,17 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
     });
   }
 
+  Future<void> initializeFlutterFire() async {
+    await Firebase.initializeApp();
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,9 +110,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
             padding: EdgeInsets.only(right:20),
             child: GestureDetector(
               onTap: () {
-
-                //update the db
-
+                editItems();
               },
               child: Icon(
                 Icons.check,
@@ -121,7 +148,7 @@ class _FoodDetailsScreenState extends State<FoodDetailsScreen> {
                   ),
                   Spacer(),
                   Text(
-                    "${amount}",
+                    "$amount",
                   )
                 ],
               )

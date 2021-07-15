@@ -1,11 +1,14 @@
-import 'dart:math';
+import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:app/module/fooddbmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FoodDetailsAddScreen extends StatefulWidget {
   final int id;
@@ -19,12 +22,8 @@ class _FoodDetailsAddScreenState extends State<FoodDetailsAddScreen> {
   int ingredientamount = 0;
   FoodData foodData;
   bool loading = true;
-
-  @override
-  void initState() {
-    fetchData();
-    super.initState();
-  }
+  String userId;
+  var uAddress;
 
   Future<void> fetchData() async {
     var url = "https://api.nal.usda.gov/fdc/v1/food/${widget.id}?api_key=aNQ649BoLEb3xRcH1J7JwPikv8rlqkLkgXmO1nL0";
@@ -32,8 +31,49 @@ class _FoodDetailsAddScreenState extends State<FoodDetailsAddScreen> {
     var decodedResponse = convert.jsonDecode(response.body);
     foodData = FoodData.fromMap(decodedResponse);
     setState(() {
+      userId = FirebaseAuth.instance.currentUser.uid;
       loading = false;
     });
+    fetchAddress();
+  }
+
+  Future<void> fetchAddress() async{
+    var document  = FirebaseFirestore.instance.collection('users').doc(userId);
+    var a = await document.get();
+    var documentData = a.data();
+    var uaddress = documentData['address'];
+    setState(() {
+      uAddress = uaddress;
+    });
+  }
+
+  Future<void> addItems() async {
+
+    var document = FirebaseFirestore.instance.collection('kitchen').doc(uAddress).collection('items').doc('${widget.id}');
+    var a = await document.get();
+    var documentData = a.data();
+    if (documentData == null) {
+      FirebaseFirestore.instance
+          .collection('kitchen')
+          .doc(uAddress)
+          .collection('items')
+          .doc('${widget.id}')
+          .set({
+            'amount': ingredientamount,
+            'name': foodData?.description??""
+          });
+      Navigator.of(context).pop();
+    } else{
+      int examount = documentData['amount'];
+      int newamount = examount + ingredientamount;
+      FirebaseFirestore.instance
+          .collection('kitchen')
+          .doc(uAddress)
+          .collection('items')
+          .doc('${widget.id}')
+          .update({'amount': newamount});
+      Navigator.of(context).pop();
+    }
   }
 
   Future<String> createAlertDialog(BuildContext context){
@@ -70,6 +110,17 @@ class _FoodDetailsAddScreenState extends State<FoodDetailsAddScreen> {
     });
   }
 
+  Future<void> initializeFlutterFire() async {
+    await Firebase.initializeApp();
+  }
+
+  @override
+  void initState() {
+    initializeFlutterFire();
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,9 +131,7 @@ class _FoodDetailsAddScreenState extends State<FoodDetailsAddScreen> {
             padding: EdgeInsets.only(right:20),
             child: GestureDetector(
               onTap: () {
-
-                //save to d
-
+                addItems();
               },
               child: Icon(
                   Icons.check,
@@ -117,9 +166,11 @@ class _FoodDetailsAddScreenState extends State<FoodDetailsAddScreen> {
                           "${foodData.foodAttributes[index].foodAttributeType.name}: ",
                           style: TextStyle(fontSize: 20),
                         ),
-                        Text(
-                          "${foodData.foodAttributes[index].value}",
-                          style: TextStyle(fontSize: 20),
+                        Expanded(
+                          child: Text(
+                            "${foodData.foodAttributes[index].value}",
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
                       ],
                     ),

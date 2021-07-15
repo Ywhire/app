@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.11.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -36,13 +36,11 @@ dependencies:
   provider: ^5.0.0
   #profile icons
   flutter_vector_icons: ^0.2.1
-  firebase_core: "0.7.0"
-  firebase_auth: "0.20.1"
-  cloud_firestore: "^0.16.0+1"
-  clay_containers: ^0.3.2
-
-
-
+  firebase_core: "^0.7.0"
+  firebase_auth: "^0.20.1"
+  cloud_firestore: "^0.16.0"
+  
+  
 dependency_overrides:
   intl: ^0.17.0-nullsafety.2
 
@@ -66,8 +64,9 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-assets:
-  -assets/images/elma.png
+  assets:
+    - elma.png
+    - water.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
