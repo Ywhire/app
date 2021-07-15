@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:app/module/myprofile/bmiCalculatorScreen.dart';
 import 'package:app/module/myprofile/chart.dart';
 import 'package:app/widget/drawer.dart';
@@ -8,8 +6,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-
 
 class MyProfilePage  extends StatefulWidget {
   @override
@@ -20,11 +16,13 @@ class MyProfilePage  extends StatefulWidget {
 final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
 
 class _MyProfilePageState extends State<MyProfilePage>{
+  bool loading = true;
   var weight;
   var target = "0";
   String uId;
   String name;
   String surname;
+  int age;
 
   Future<void> fetchData() async{
     setState(() {
@@ -40,10 +38,13 @@ class _MyProfilePageState extends State<MyProfilePage>{
     var uname = documentData['name'];
     var usurname = documentData['surname'];
     var uweight = documentData['weight'];
+    var uage = documentData['age'];
     setState(() {
       name = uname;
       surname = usurname;
+      age = uage;
       weight = uweight.toString();
+      loading = false;
     });
   }
 
@@ -90,13 +91,12 @@ class _MyProfilePageState extends State<MyProfilePage>{
 
   @override
   Widget build(BuildContext context) {
-
     return new Scaffold(
       appBar: AppBar(
         title: Text("My Profile"),
       ),
       drawer: SideDrawer(),
-      body: Column(
+      body: loading ? Center(child: CircularProgressIndicator()): Column(
         children: <Widget>[
           Container(
               decoration: BoxDecoration(
@@ -108,17 +108,16 @@ class _MyProfilePageState extends State<MyProfilePage>{
               ),
               child: Container(
                 width: double.infinity,
-                height: 250.0,
+                height: 220.0,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
-
                     children: <Widget>[
                       SizedBox(height: 15,),
                       Padding(
                         padding: const EdgeInsets.only(left: 20.0),
-                        child: Text("${name} ${surname}" ,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
+                        child: Text("${name} ${surname}, ${age.toString()}" ,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
                       ),
                       SizedBox(height: 15,),
                       Card(
@@ -153,24 +152,22 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                               fontSize: 20
                                           )
                                       ),
-
                                       onPressed: (){
                                         createAlertDialog(context).then((value){
-                                          setState(() {
-                                            weight = value;
-                                          });
+                                          if(value != null){
+                                            setState(() {
+                                              weight = value;
+                                            });
+                                          }
                                         });
                                       },
                                       child: Text(weight.toString()),
-
                                     )
-
                                   ],
                                 ),
                               ),
                               Expanded(
                                 child: Column(
-
                                   children: <Widget>[
                                     Text(
                                       "Target",
@@ -199,7 +196,6 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                         });
                                       },
                                       child: Text(target),
-
                                     )
                                   ],
                                 ),
@@ -214,65 +210,9 @@ class _MyProfilePageState extends State<MyProfilePage>{
                 ),
               )
           ),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0,horizontal: 16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-
-                  SizedBox(
-                    height: 10.0,
-                  ),
-
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 0.0,
-          ),
-          Container(
-            width: 250.00,
-
-            child: RaisedButton(
-                onPressed: (){
-                  Navigator.push(context , MaterialPageRoute(
-                      builder: (context) => bmiCalculatorScreen()
-                  ));
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(80.0)
-                ),
-                elevation: 0.0,
-                padding: EdgeInsets.all(0.0),
-                child: Ink(
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                        colors: [Colors.yellow,Colors.amber]
-                    ),
-                    borderRadius: BorderRadius.circular(30.0),
-                  ),
-                  child: Container(
-                    constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
-                    alignment: Alignment.center,
-                    child: Text("BMİ Calculator",
-                      style: TextStyle(color: Colors.black, fontSize: 26.0, fontWeight:FontWeight.bold),
-                    ),
-                  ),
-                ),
-            ),
-          ),
-
-
-                SizedBox(
-                  height: 20.0,
-                ),
-                ClayContainer(
-                  height: 200,
+          SizedBox(height: 30,),
+          ClayContainer(
+                  height: 250,
                   width: 350,
                   depth: 12,
                   spread: 12,
@@ -280,7 +220,40 @@ class _MyProfilePageState extends State<MyProfilePage>{
                   child: Chart(
                     data: data,
                   ),
-                )
+          ),
+          SizedBox(height: 30.0,),
+          Container(
+            width: 250.00,
+            child: RaisedButton(
+              onPressed: (){
+                Navigator.push(context , MaterialPageRoute(
+                    builder: (context) => bmiCalculatorScreen()
+                ));
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(80.0)
+              ),
+              elevation: 0.0,
+              padding: EdgeInsets.all(0.0),
+              child: Ink(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      begin: Alignment.centerRight,
+                      end: Alignment.centerLeft,
+                      colors: [Colors.yellow,Colors.amber]
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                child: Container(
+                  constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                  alignment: Alignment.center,
+                  child: Text("BMI Calculator",
+                    style: TextStyle(color: Colors.black, fontSize: 26.0, fontWeight:FontWeight.bold),
+                  ),
+                ),
+              ),
+            ),
+          ),
         ],
 
       ),

@@ -18,6 +18,9 @@ class _bmiCalculatorScreenState extends State<bmiCalculatorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("BMI Calculator"),
+      ),
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
