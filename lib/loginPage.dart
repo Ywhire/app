@@ -30,6 +30,13 @@ class _LoginBodyState extends State<LoginBody> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      constraints: BoxConstraints.expand(),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              fit: BoxFit.fill,
+              image: AssetImage("water.png"),
+              colorFilter: new ColorFilter.mode(
+                  Colors.black.withOpacity(0.1), BlendMode.dstATop))),
       child: Form(
         key: _formKey,
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
@@ -47,7 +54,7 @@ class _LoginBodyState extends State<LoginBody> {
                   hintText: "Your Email",
                   icon: Icon(
                     Icons.mail,
-                    color: Colors.amber,
+                    color: Colors.deepOrange[300],
                   )),
             ),
           ),
@@ -65,7 +72,7 @@ class _LoginBodyState extends State<LoginBody> {
                   hintText: "Your Password",
                   icon: Icon(
                     Icons.lock,
-                    color: Colors.amber,
+                    color: Colors.deepOrange[300],
                   )),
             ),
           ),
@@ -79,7 +86,7 @@ class _LoginBodyState extends State<LoginBody> {
                   padding: const EdgeInsets.all(16.0),
                   primary: Colors.black,
                   textStyle: const TextStyle(fontSize: 20),
-                  backgroundColor: Colors.amber,
+                  backgroundColor: Colors.lightGreen[300],
                 ),
                 onPressed: () async {
                   if (_formKey.currentState.validate()) {

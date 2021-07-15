@@ -4,14 +4,18 @@ import 'package:app/module/welcome/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widget/drawer.dart';
 
+import 'add_meal_page.dart';
+
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
-  final String value;
+  final String breakfastText;
   final String lunchText;
+  final String dinnerText;
   const HomePage({
     Key key,
-    this.value = "Breakfast",
-    this.lunchText = "Lunch",
+    this.breakfastText,
+    this.lunchText,
+    this.dinnerText,
   }) : super(key: key);
 
   @override
@@ -20,161 +24,61 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final Authentication _auth = Authentication();
+  final List<String> entries = <String>['Breakfast', 'Lunch', 'Dinner'];
+  final List<int> colorCodes = <int>[600, 500, 100];
 
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: AppBar(
-          title: Text("Diet Master"),
-          actions: [
-            TextButton.icon(
-                onPressed: () async {
-                  await _auth.signOut();
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => WelcomePage()));
-                },
-                icon: Icon(Icons.exit_to_app),
-                label: Text(
-                  "Signout",
-                  style: TextStyle(color: Colors.black),
-                ))
-          ],
-        ),
-        drawer: SideDrawer(),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  RectanText(text: "${widget.value}", color: Colors.amber),
-                  PlusButton(press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NavigatorMeals()),
-                    );
-                  })
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  RectanText(text: "${widget.lunchText}", color: Colors.amber),
-                  PlusButton(press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NavigatorMeals()),
-                    );
-                  }),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  RectanText(text: "Dinner", color: Colors.amber),
-                  PlusButton(press: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NavigatorMeals()),
-                    );
-                  }),
-                ],
-              ),
-            ],
-          ),
-        ));
-  }
-}
-
-class NavigatorMeals extends StatefulWidget {
-  final String value1;
-  final String value2;
-  final String value3;
-  final String value4;
-  final String value5;
-
-  const NavigatorMeals(
-      {Key key,
-      this.value1 = "Egg",
-      this.value2 = "Milk",
-      this.value3 = "Egg with Sausage",
-      this.value4 = "Lentil soup",
-      this.value5 = "Steak"})
-      : super(key: key);
-
-  @override
-  _MealState createState() => new _MealState();
-}
-
-class _MealState extends State<NavigatorMeals> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
       appBar: AppBar(
-        title: Text("Meals"),
+        title: Text("Diet Master"),
+        actions: [
+          TextButton.icon(
+              onPressed: () async {
+                await _auth.signOut();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WelcomePage()));
+              },
+              icon: Icon(
+                Icons.exit_to_app,
+                color: Colors.deepOrange[600],
+              ),
+              label: Text(
+                "Signout",
+                style: TextStyle(color: Colors.black),
+              ))
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RectanText(
-              text: "${widget.value1}",
-              color: Colors.amber,
-              press: () {
-                var route = new MaterialPageRoute(
-                    builder: (BuildContext context) => new HomePage(
-                          value: "${widget.value1}",
-                        ));
-                Navigator.of(context).push(route);
-              },
-            ),
-            RectanText(
-                text: "${widget.value2}",
-                color: Colors.amber,
-                press: () {
-                  var route = new MaterialPageRoute(
-                      builder: (BuildContext context) => new HomePage(
-                            value: "${widget.value2}",
-                          ));
-                  Navigator.of(context).push(route);
-                }),
-            RectanText(
-              text: "${widget.value3}",
-              color: Colors.amber,
-              press: () {
-                var route = new MaterialPageRoute(
-                    builder: (BuildContext context) => new HomePage(
-                          value: "${widget.value3}",
-                        ));
-                Navigator.of(context).push(route);
-              },
-            ),
-            RectanText(
-              text: "${widget.value4}",
-              color: Colors.amber,
-              press: () {
-                var route = new MaterialPageRoute(
-                    builder: (BuildContext context) => new HomePage(
-                          value: "${widget.value4}",
-                        ));
-                Navigator.of(context).push(route);
-              },
-            ),
-            RectanText(
-              text: "${widget.value5}",
-              color: Colors.amber,
-              press: () {
-                var route = new MaterialPageRoute(
-                    builder: (BuildContext context) => new HomePage(
-                          value: "${widget.value5}",
-                        ));
-                Navigator.of(context).push(route);
-              },
-            )
-          ],
-        ),
-      ),
+      drawer: SideDrawer(),
+      body: ListView.separated(
+          padding: const EdgeInsets.all(8.0),
+          separatorBuilder: (BuildContext context, int index) => Divider(),
+          itemCount: entries.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+                height: 100,
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      ' ${entries[index]}',
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    InkWell(
+                      child: Text(
+                        "Add Item",
+                        style: TextStyle(
+                            color: Colors.lightGreen[800],
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30),
+                      ),
+                      onTap: () {},
+                    ),
+                  ],
+                ));
+          }),
     );
   }
 }

@@ -39,7 +39,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                     hintText: "Your Email",
                     icon: Icon(
                       Icons.mail,
-                      color: Colors.amber,
+                      color: Colors.deepOrange[300],
                     )),
               ),
             ),
@@ -57,7 +57,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                     hintText: "Your Password",
                     icon: Icon(
                       Icons.lock,
-                      color: Colors.amber,
+                      color: Colors.deepOrange[300],
                     )),
               ),
             ),
@@ -73,7 +73,7 @@ class _SignUpBodyState extends State<SignUpBody> {
                     padding: const EdgeInsets.all(16.0),
                     primary: Colors.black,
                     textStyle: const TextStyle(fontSize: 20),
-                    backgroundColor: Colors.amber,
+                    backgroundColor: Colors.lightGreen[300],
                   ),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
