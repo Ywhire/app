@@ -1,10 +1,13 @@
+// @dart=2.9
+
 import 'dart:math';
 
 import 'package:app/module/myprofile/bmiCalculatorScreen.dart';
+import 'package:app/module/myprofile/chart.dart';
 import 'package:app/widget/drawer.dart';
+import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+
 
 
 class MyProfilePage  extends StatefulWidget {
@@ -12,13 +15,14 @@ class MyProfilePage  extends StatefulWidget {
   _MyProfilePageState createState() => _MyProfilePageState();
   static const String routeName = '/myprofile';
 
-
 }
+final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
   class _MyProfilePageState extends State<MyProfilePage>{
 
-  var weight ;
-  var target;
-  var name;
+
+  var weight  = "0";
+  var target = "0";
+  String name = "Name";
 
 
   @override
@@ -32,13 +36,9 @@ class MyProfilePage  extends StatefulWidget {
 
     return showDialog(context: context, builder: (context){
       return AlertDialog(
-        title: Text("How Much?"),
+        title: Text("Value"),
         content: TextField(
           controller: myController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly
-          ],
         ),
         actions: <Widget>[
           MaterialButton(
@@ -91,6 +91,13 @@ class MyProfilePage  extends StatefulWidget {
                         height: 10.0,
                       ),
                       TextButton(
+                        style:TextButton.styleFrom(
+                          primary: Colors.black,
+                          textStyle: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20
+                          )
+                        ),
                         onPressed: (){
                           createAlertDialog(context).then((value){
                             setState(() {
@@ -98,18 +105,8 @@ class MyProfilePage  extends StatefulWidget {
                             });
                           });
                         },
+
                         child: Text(name),
-
-                        /*
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.only(bottom: 10.0),
-
-                        ),
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.black,
-
-                        ),*/
 
                       ),
 
@@ -141,6 +138,13 @@ class MyProfilePage  extends StatefulWidget {
                                       height: 5.0,
                                     ),
                                     TextButton(
+                                      style:TextButton.styleFrom(
+                                          primary: Colors.black,
+                                          textStyle: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20
+                                          )
+                                      ),
 
                                       onPressed: (){
                                         createAlertDialog(context).then((value){
@@ -150,18 +154,6 @@ class MyProfilePage  extends StatefulWidget {
                                         });
                                       },
                                       child: Text(weight),
-
-                                      //keyboardType: TextInputType.number,
-
-                                     /* decoration: InputDecoration(
-                                        contentPadding: EdgeInsets.only(bottom: 10.0),
-                                        hintText: weight,
-                                      ),
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-
-                                      ),*/
 
                                     )
 
@@ -184,6 +176,13 @@ class MyProfilePage  extends StatefulWidget {
                                       height: 5.0,
                                     ),
                                     TextButton(
+                                      style:TextButton.styleFrom(
+                                          primary: Colors.black,
+                                          textStyle: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 20
+                                          )
+                                      ),
                                       onPressed: (){
                                         createAlertDialog(context).then((value){
                                           setState(() {
@@ -214,15 +213,7 @@ class MyProfilePage  extends StatefulWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    "BMİ:",
-                    style: TextStyle(
-                        color: Colors.amberAccent[700],
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 28.0
-                    ),
-                  ),
+
                   SizedBox(
                     height: 10.0,
                   ),
@@ -232,10 +223,10 @@ class MyProfilePage  extends StatefulWidget {
             ),
           ),
           SizedBox(
-            height: 20.0,
+            height: 0.0,
           ),
           Container(
-            width: 300.00,
+            width: 250.00,
 
             child: RaisedButton(
                 onPressed: (){
@@ -260,15 +251,32 @@ class MyProfilePage  extends StatefulWidget {
                   child: Container(
                     constraints: BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
                     alignment: Alignment.center,
-                    child: Text("Calculator",
+                    child: Text("BMİ Calculator",
                       style: TextStyle(color: Colors.black, fontSize: 26.0, fontWeight:FontWeight.bold),
                     ),
                   ),
-                )
+                ),
             ),
           ),
+
+
+                SizedBox(
+                  height: 20.0,
+                ),
+                ClayContainer(
+                  height: 200,
+                  width: 500,
+                  depth: 12,
+                  spread: 12,
+                  borderRadius: 16,
+                  child: Chart(
+                    data: data,
+                  ),
+                )
         ],
+
       ),
     );
   }
 }
+
