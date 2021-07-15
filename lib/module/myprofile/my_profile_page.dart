@@ -1,11 +1,11 @@
-// @dart=2.9
-
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:app/module/myprofile/bmiCalculatorScreen.dart';
 import 'package:app/module/myprofile/chart.dart';
 import 'package:app/widget/drawer.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 
@@ -22,12 +22,28 @@ final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
 
   var weight  = "0";
   var target = "0";
-  String name = "Name";
+  var uId;
+  var name  = "";
 
+  Future<void> fetchData() async{
+    var document  = FirebaseFirestore.instance.collection('users').doc(uId);
+    var a = await document.get();
+    var documentData = a.data();
+    var uname = documentData['name'];
+    setState(() {
+      name = uname;
+    });
+    log(name);
+  }
 
   @override
   void initSate(){
+    setState(() {
+      uId = FirebaseAuth.instance.currentUser.uid;
 
+    });
+    fetchData();
+    super.initState();
   }
 
   Future<String> createAlertDialog(BuildContext context){
@@ -90,25 +106,11 @@ final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
                       SizedBox(
                         height: 10.0,
                       ),
-                      TextButton(
-                        style:TextButton.styleFrom(
-                          primary: Colors.black,
-                          textStyle: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20
-                          )
-                        ),
-                        onPressed: (){
-                          createAlertDialog(context).then((value){
-                            setState(() {
-                              name = value;
-                            });
-                          });
-                        },
 
-                        child: Text(name),
-
-                      ),
+                        Text(name,
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),),
 
                       SizedBox(
                         height: 10.0,
