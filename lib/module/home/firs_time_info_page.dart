@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,13 +35,15 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
       'weight': weight,
       'age': age,
     });
+    createKitchen(address);
   }
 
   Future<void> createKitchen(address) async {
     FirebaseFirestore.instance
         .collection('kitchen')
         .doc('$address')
-        .collection('items');
+        .collection('items')
+        .doc('create').set({'first': 0});
   }
 
   Future<void> initializeFlutterFire() async {

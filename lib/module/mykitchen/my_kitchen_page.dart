@@ -7,8 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widget/drawer.dart';
 import 'package:app/module/mykitchen/add_stock_item.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 import '../fooddbmodel.dart';
 
 class MyKitchenPage extends StatefulWidget {
@@ -19,11 +17,9 @@ class MyKitchenPage extends StatefulWidget {
 }
 
 class _MyKitchenPageState extends State<MyKitchenPage> {
-  List myStockId = [];
-  List myStockAmount = [];
-  List myStockName = [];
   FoodData foodData;
   bool loading = false;
+  String userId;
 
   Future<void> initializeFlutterFire() async {
     await Firebase.initializeApp();
@@ -32,6 +28,9 @@ class _MyKitchenPageState extends State<MyKitchenPage> {
   @override
   void initState() {
     initializeFlutterFire();
+    setState(() {
+      userId = FirebaseAuth.instance.currentUser.uid;
+    });
     super.initState();
   }
   @override
@@ -41,7 +40,7 @@ class _MyKitchenPageState extends State<MyKitchenPage> {
         title: Text("My Kitchen"),
       ),
       drawer: SideDrawer(),
-      body: loading ? Center(child: CircularProgressIndicator()): StockList(),
+      body: loading ? Center(child: CircularProgressIndicator()): StockList(userId),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
@@ -56,14 +55,46 @@ class _MyKitchenPageState extends State<MyKitchenPage> {
   }
 }
 
-class StockList extends StatelessWidget {
+class StockList extends StatefulWidget {
 
-  var userId = FirebaseAuth.instance.currentUser.uid;
- // var address = FirebaseFirestore.instance.collection(collectionPath)
+  final String id;
+  StockList(this.id);
+
+  @override
+  _StockListState createState() => _StockListState();
+}
+
+class _StockListState extends State<StockList> {
+
+  var uId;
+  var uAddress;
+
+
+
+  Future<void> fetchData() async{
+    var document  = FirebaseFirestore.instance.collection('users').doc(uId);
+    var a = await document.get();
+    var documentData = a.data();
+    var uaddress = documentData['address'];
+    setState(() {
+      uAddress = uaddress;
+    });
+    FirebaseFirestore.instance.collection('kitchen').doc(uAddress).collection('items').doc('create').delete();
+  }
+
+  @override
+  void initState() {
+    setState(() {
+      uId = widget.id;
+    });
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('kitchen').doc('adress0').collection('items').snapshots(),
+        stream: FirebaseFirestore.instance.collection('kitchen').doc(uAddress).collection('items').snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
           List<DocumentSnapshot> listofDocSnap = snapshot.data.docs;
           if(!snapshot.hasData) return new Text('Loading...');
@@ -95,7 +126,5 @@ class StockList extends StatelessWidget {
           );
         });
   }
-
-
 }
 
