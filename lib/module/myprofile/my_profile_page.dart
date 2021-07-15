@@ -6,6 +6,7 @@ import 'package:app/widget/drawer.dart';
 import 'package:clay_containers/widgets/clay_container.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 
@@ -14,36 +15,36 @@ class MyProfilePage  extends StatefulWidget {
   @override
   _MyProfilePageState createState() => _MyProfilePageState();
   static const String routeName = '/myprofile';
-
 }
+
 final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
-  class _MyProfilePageState extends State<MyProfilePage>{
 
-
-  var weight  = "0";
+class _MyProfilePageState extends State<MyProfilePage>{
+  var weight;
   var target = "0";
-  var uId;
-  var name  = "";
+  String uId;
+  String name;
+  String surname;
 
   Future<void> fetchData() async{
+    setState(() {
+      uId = FirebaseAuth.instance.currentUser.uid;
+    });
+    fetchInfo();
+  }
+
+  Future<void> fetchInfo() async {
     var document  = FirebaseFirestore.instance.collection('users').doc(uId);
     var a = await document.get();
     var documentData = a.data();
     var uname = documentData['name'];
+    var usurname = documentData['surname'];
+    var uweight = documentData['weight'];
     setState(() {
       name = uname;
+      surname = usurname;
+      weight = uweight.toString();
     });
-    log(name);
-  }
-
-  @override
-  void initSate(){
-    setState(() {
-      uId = FirebaseAuth.instance.currentUser.uid;
-
-    });
-    fetchData();
-    super.initState();
   }
 
   Future<String> createAlertDialog(BuildContext context){
@@ -75,6 +76,18 @@ final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
       );
     });
   }
+
+  Future<void> initializeFlutterFire() async {
+    await Firebase.initializeApp();
+  }
+
+  @override
+  void initState(){
+    initializeFlutterFire();
+    fetchData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -98,23 +111,16 @@ final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
                 height: 250.0,
                 child: Center(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
 
                     children: <Widget>[
-
-                      SizedBox(
-                        height: 10.0,
+                      SizedBox(height: 15,),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20.0),
+                        child: Text("${name} ${surname}" ,style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),),
                       ),
-
-                        Text(name,
-                        style: TextStyle(
-                          color: Colors.black,
-                        ),),
-
-                      SizedBox(
-                        height: 10.0,
-                      ),
+                      SizedBox(height: 15,),
                       Card(
                         margin: EdgeInsets.symmetric(horizontal: 20.0,vertical: 5.0),
                         clipBehavior: Clip.antiAlias,
@@ -155,7 +161,7 @@ final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
                                           });
                                         });
                                       },
-                                      child: Text(weight),
+                                      child: Text(weight.toString()),
 
                                     )
 
@@ -267,7 +273,7 @@ final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
                 ),
                 ClayContainer(
                   height: 200,
-                  width: 500,
+                  width: 350,
                   depth: 12,
                   spread: 12,
                   borderRadius: 16,
