@@ -1,6 +1,9 @@
 import 'package:app/authenticaiton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:app/module/home/homePage.dart';
+
+import 'module/home/firs_time_info_page.dart';
 
 class SignUpBody extends StatefulWidget {
   @override
@@ -77,12 +80,13 @@ class _SignUpBodyState extends State<SignUpBody> {
                       dynamic result = await _authentication.register(
                           email: email, password: pass);
                       if (result != null) {
+                        var firebaseUser = FirebaseAuth.instance.currentUser;
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                                builder: (context) => CreateUserInfo(firebaseUser.uid)));
                       } else {
-                        setState(() => error = "Please provide valid email ");
+                        setState(() => error = "This e-mail is already registered.");
                       }
                     }
                   },
