@@ -49,7 +49,7 @@ class _MyKitchenPageState extends State<MyKitchenPage> {
           );
         },
         child: const Icon(Icons.add),
-        backgroundColor: Colors.amber,
+        backgroundColor: Colors.lightGreen[300],
       ),
     );
   }

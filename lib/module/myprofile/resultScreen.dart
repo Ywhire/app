@@ -20,15 +20,15 @@ class resultScreen extends StatelessWidget {
               SizedBox(
                 height: 8,
               ),
-              Text("Your BMI is ${bmiModel.bmi.round()}", style: TextStyle(color: Colors.amber, fontSize: 34, fontWeight: FontWeight.w700),),
+              Text("Your BMI is ${bmiModel.bmi.round()}", style: TextStyle(color: Colors.lightGreen[300], fontSize: 34, fontWeight: FontWeight.w700),),
               Text("${bmiModel.comments}", style: TextStyle(color: Colors.grey[700], fontSize: 18, fontWeight: FontWeight.w500),),
 
               SizedBox(height: 16,),
 
               bmiModel.isNormal ?
-              Text(" Your BMI is Normal.", style: TextStyle(color: Colors.amber, fontSize: 18, fontWeight: FontWeight.w700),)
+              Text(" Your BMI is Normal.", style: TextStyle(color: Colors.lightGreen[300], fontSize: 18, fontWeight: FontWeight.w700),)
                   :
-              Text(" Your BMI is not Normal.", style: TextStyle(color: Colors.amber, fontSize: 18, fontWeight: FontWeight.w700),),
+              Text(" Your BMI is not Normal.", style: TextStyle(color: Colors.lightGreen[300], fontSize: 18, fontWeight: FontWeight.w700),),
               SizedBox(height: 16,),
 
               Container(
@@ -40,7 +40,7 @@ class resultScreen extends StatelessWidget {
                   icon: Icon(Icons.arrow_back_ios, color: Colors.white,),
                   label: Text(" CALCULATE AGAIN"),
                   textColor: Colors.white,
-                  color: Colors.amber,
+                  color: Colors.lightGreen[300],
 
                 ),
                 width: double.infinity,

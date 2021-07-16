@@ -31,7 +31,7 @@ class _bmiCalculatorScreenState extends State<bmiCalculatorScreen> {
               SizedBox(
                 height: 8,
               ),
-              Text("BMI Calculator", style: TextStyle(color: Colors.amber, fontSize: 34, fontWeight: FontWeight.w700),),
+              Text("BMI Calculator", style: TextStyle(color: Colors.lightGreen[300], fontSize: 34, fontWeight: FontWeight.w700),),
 
               SizedBox(
                 height: 32,
@@ -51,12 +51,12 @@ class _bmiCalculatorScreenState extends State<bmiCalculatorScreen> {
                   },
                   value: _heightOfUser,
                   divisions: 100,
-                  activeColor: Colors.amber,
+                  activeColor: Colors.lightGreen[300],
                   label: "$_heightOfUser",
                 ),
               ),
 
-              Text("$_heightOfUser cm", style: TextStyle(color: Colors.amber, fontSize: 18, fontWeight: FontWeight.w900),),
+              Text("$_heightOfUser cm", style: TextStyle(color: Colors.lightGreen[300], fontSize: 18, fontWeight: FontWeight.w900),),
 
               SizedBox(height: 24,),
 
@@ -74,12 +74,12 @@ class _bmiCalculatorScreenState extends State<bmiCalculatorScreen> {
                   },
                   value: _weightOfUser,
                   divisions: 100,
-                  activeColor: Colors.amber,
+                  activeColor: Colors.lightGreen[300],
                   label: "$_weightOfUser",
                 ),
               ),
 
-              Text("$_weightOfUser kg", style: TextStyle(color: Colors.amber, fontSize: 18, fontWeight: FontWeight.w900),),
+              Text("$_weightOfUser kg", style: TextStyle(color: Colors.lightGreen[300], fontSize: 18, fontWeight: FontWeight.w900),),
 
               SizedBox(height: 16,),
 
@@ -107,7 +107,7 @@ class _bmiCalculatorScreenState extends State<bmiCalculatorScreen> {
                   icon: Icon(Icons.favorite, color: Colors.white,),
                   label: Text("CALCULATE"),
                   textColor: Colors.white,
-                  color: Colors.amber,
+                  color: Colors.lightGreen[300],
 
                 ),
                 width: double.infinity,

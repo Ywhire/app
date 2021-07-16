@@ -17,12 +17,15 @@ final data = [20.0,10.0,50.0,90.0,40.0,10.0,20.0,50.0];
 
 class _MyProfilePageState extends State<MyProfilePage>{
   bool loading = true;
-  var weight;
+
+  String weight;
+
   var target = "0";
   String uId;
   String name;
   String surname;
   int age;
+
 
   Future<void> fetchData() async{
     setState(() {
@@ -31,14 +34,18 @@ class _MyProfilePageState extends State<MyProfilePage>{
     fetchInfo();
   }
 
+
   Future<void> fetchInfo() async {
+
     var document  = FirebaseFirestore.instance.collection('users').doc(uId);
+
     var a = await document.get();
     var documentData = a.data();
     var uname = documentData['name'];
     var usurname = documentData['surname'];
     var uweight = documentData['weight'];
     var uage = documentData['age'];
+
     setState(() {
       name = uname;
       surname = usurname;
@@ -46,6 +53,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
       weight = uweight.toString();
       loading = false;
     });
+
   }
 
   Future<String> createAlertDialog(BuildContext context){
@@ -103,7 +111,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.yellow, Colors.amber]
+                      colors: [Colors.yellow, Colors.lightGreen[300]]
                   )
               ),
               child: Container(
@@ -136,7 +144,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                     Text(
                                       "Weight",
                                       style: TextStyle(
-                                        color: Colors.amberAccent[700],
+                                        color: Colors.lightGreenAccent[700],
                                         fontSize: 22.0,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -172,7 +180,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                     Text(
                                       "Target",
                                       style: TextStyle(
-                                        color: Colors.amberAccent[700],
+                                        color: Colors.lightGreenAccent[700],
                                         fontSize: 22.0,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -190,9 +198,11 @@ class _MyProfilePageState extends State<MyProfilePage>{
                                       ),
                                       onPressed: (){
                                         createAlertDialog(context).then((value){
-                                          setState(() {
-                                            target = value;
-                                          });
+                                          if(value != null) {
+                                            setState(() {
+                                              target = value;
+                                            });
+                                          }
                                         });
                                       },
                                       child: Text(target),
@@ -240,7 +250,7 @@ class _MyProfilePageState extends State<MyProfilePage>{
                   gradient: LinearGradient(
                       begin: Alignment.centerRight,
                       end: Alignment.centerLeft,
-                      colors: [Colors.yellow,Colors.amber]
+                      colors: [Colors.yellow,Colors.lightGreen[300]]
                   ),
                   borderRadius: BorderRadius.circular(30.0),
                 ),

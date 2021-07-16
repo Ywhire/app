@@ -176,7 +176,7 @@ class _changePasswordPageState extends State<changePasswordPage> {
                     //padding: const EdgeInsets.symmetric(vertical: 10),
                     primary: Colors.white,
                     textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-                    backgroundColor: Colors.amber,
+                    backgroundColor: Colors.lightGreen[300],
                   ),
                   onPressed: isDisabled ? null : () {
                       FirebaseAuth.instance.currentUser.updatePassword(newPass0);
