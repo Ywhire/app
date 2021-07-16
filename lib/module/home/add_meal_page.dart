@@ -23,6 +23,7 @@ class Meals extends StatefulWidget {
 class _MealState extends State<Meals> {
   String userId;
   String prefMeal;
+  String firstLetter;
 
   Future<void> initializeFlutterFire() async {
     await Firebase.initializeApp();
@@ -34,6 +35,9 @@ class _MealState extends State<Meals> {
     setState(() {
       userId = FirebaseAuth.instance.currentUser.uid;
       prefMeal = widget.whichMeal;
+      firstLetter = prefMeal.substring(0, 1);
+      prefMeal =
+          firstLetter.toUpperCase() + prefMeal.substring(1, prefMeal.length);
     });
     super.initState();
   }
@@ -42,7 +46,7 @@ class _MealState extends State<Meals> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Meal/"),
+        title: Text("Add Meal for $prefMeal"),
       ),
       body: ViewingStock(
         uid: userId,
