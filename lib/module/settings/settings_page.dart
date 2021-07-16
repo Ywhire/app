@@ -54,7 +54,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                     ListTile(
                       title: Text("My Account",style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),),
-                    ),
+                    ),/*
                     ListTile(
                       title: Text("Edit Profile",style: TextStyle(fontWeight: FontWeight.w400),),
                       onTap: (){
@@ -85,7 +85,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Divider(
                       height: 0,
                       thickness: 2,
-                    ),
+                    ),*/
                     ListTile(
                       title: Text("Change Password",style: TextStyle(fontWeight: FontWeight.w400),),
                       onTap: (){
@@ -109,6 +109,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
               ),
               Card(
+                elevation: 10,
                 margin: const EdgeInsets.fromLTRB(0, 1, 0, 8),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
                 child: Column(

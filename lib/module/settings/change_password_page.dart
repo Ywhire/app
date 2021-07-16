@@ -160,24 +160,30 @@ class _changePasswordPageState extends State<changePasswordPage> {
                 obscureText: isObscure1,
               ),
             ),
-            Container(
-              child: TextButton(
-                style: isDisabled ? TextButton.styleFrom(
-                  //padding: const EdgeInsets.symmetric(vertical: 10),
-                  primary: Colors.blueGrey,
-                  textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-                  backgroundColor: Colors.grey,
-                ) : TextButton.styleFrom(
-                  //padding: const EdgeInsets.symmetric(vertical: 10),
-                  primary: Colors.white,
-                  textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-                  backgroundColor: Colors.amber,
+            Spacer(),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(10),
+                child: TextButton(
+                  style: isDisabled ? TextButton.styleFrom(
+                    //padding: const EdgeInsets.symmetric(vertical: 10),
+                    primary: Colors.blueGrey,
+                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                    backgroundColor: Colors.grey,
+                  ) : TextButton.styleFrom(
+                    //padding: const EdgeInsets.symmetric(vertical: 10),
+                    primary: Colors.white,
+                    textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+                    backgroundColor: Colors.amber,
+                  ),
+                  onPressed: isDisabled ? null : () {
+                      FirebaseAuth.instance.currentUser.updatePassword(newPass0);
+                      Navigator.pop(context);
+                  },
+                  child: const Text("Register"),
                 ),
-                onPressed: isDisabled ? null : () {
-                    FirebaseAuth.instance.currentUser.updatePassword(newPass0);
-                    Navigator.pop(context);
-                },
-                child: const Text("Register"),
               ),
             ),
           ],

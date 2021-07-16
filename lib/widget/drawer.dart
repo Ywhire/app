@@ -23,12 +23,12 @@ class SideDrawer extends StatelessWidget {
               icon: Icons.kitchen,
               text: 'My Kitchen',
               onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.mykitchen)),
+                  Navigator.pushReplacementNamed(context, Routes.mykitchen)),/*
           _createDrawerItem(
               icon: Icons.calendar_today,
               text: 'Calendar',
               onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.calendar)),
+                  Navigator.pushReplacementNamed(context, Routes.calendar)),*/
           _createDrawerItem(
               icon: Icons.settings,
               text: 'Settings',
