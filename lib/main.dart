@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          primarySwatch: Colors.amber,
+          primarySwatch: Colors.lightGreen,
         ),
         home: Wrapper(),
         routes: {

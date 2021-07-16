@@ -16,7 +16,7 @@ class Body extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 55,
-                color: Colors.deepOrange[300]),
+                color: Colors.lightGreen[300]),
           ),
           Image.asset(
             "elma.png",

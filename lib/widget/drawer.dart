@@ -50,7 +50,7 @@ class SideDrawer extends StatelessWidget {
         margin: EdgeInsets.zero,
         padding: EdgeInsets.zero,
         decoration: BoxDecoration(
-            color: Colors.amber,
+            color: Colors.lightGreen[300],
 
         ),
         child: Stack(children: <Widget>[

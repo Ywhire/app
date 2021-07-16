@@ -27,16 +27,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _userid = FirebaseAuth.instance.currentUser.uid;
 
-  Future<void> updateBreakfast(
-      String itemName, String amount, String itemId) async {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(_userid)
-        .collection('meals')
-        .doc('breakfast')
-        .collection(itemId)
-        .doc();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Meals()),
+                            MaterialPageRoute(builder: (context) => Meals(whichMeal: "breakfast")),
                           );
                         },
                         child: Text("Add food")),
@@ -141,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Meals()),
+                            MaterialPageRoute(builder: (context) => Meals(whichMeal: "lunch",)),
                           );
                         },
                         child: Text("Add food")),
@@ -172,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Meals()),
+                            MaterialPageRoute(builder: (context) => Meals(whichMeal: "dinner",)),
                           );
                         },
                         child: Text("Add food")),

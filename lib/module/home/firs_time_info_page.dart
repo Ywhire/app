@@ -82,7 +82,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                         hintText: "Your Name",
                         icon: Icon(
                           Icons.arrow_forward_ios_sharp,
-                          color: Colors.amber,
+                          color: Colors.lightGreen[300],
                         )),
                   ),
                 ),
@@ -101,7 +101,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                         hintText: "Your Surname",
                         icon: Icon(
                           Icons.arrow_forward_ios_sharp,
-                          color: Colors.amber,
+                          color: Colors.lightGreen[300],
                         )),
                   ),
                 ),
@@ -120,7 +120,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                         hintText: "Your Address",
                         icon: Icon(
                           Icons.arrow_forward_ios_sharp,
-                          color: Colors.amber,
+                          color: Colors.lightGreen[300],
                         )),
                   ),
                 ),
@@ -139,7 +139,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                         hintText: "Your Age",
                         icon: Icon(
                           Icons.arrow_forward_ios_sharp,
-                          color: Colors.amber,
+                          color: Colors.lightGreen[300],
                         )),
                   ),
                 ),
@@ -159,7 +159,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                         hintText: "Your Height",
                         icon: Icon(
                           Icons.arrow_forward_ios_sharp,
-                          color: Colors.amber,
+                          color: Colors.lightGreen[300],
                         )),
                   ),
                 ),
@@ -179,7 +179,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                         hintText: "Your Weight",
                         icon: Icon(
                           Icons.arrow_forward_ios_sharp,
-                          color: Colors.amber,
+                          color: Colors.lightGreen[300],
                         )),
                   ),
                 ),
@@ -193,7 +193,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                         padding: const EdgeInsets.all(16.0),
                         primary: Colors.black,
                         textStyle: const TextStyle(fontSize: 20),
-                        backgroundColor: Colors.amber,
+                        backgroundColor: Colors.lightGreen[300],
                       ),
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
