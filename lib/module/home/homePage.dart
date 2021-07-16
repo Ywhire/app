@@ -1,6 +1,7 @@
 import 'package:app/authenticaiton.dart';
 import 'package:app/buttons.dart';
 import 'package:app/module/welcome/welcomePage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:app/widget/drawer.dart';
 
@@ -8,14 +9,10 @@ import 'add_meal_page.dart';
 
 class HomePage extends StatefulWidget {
   static const String routeName = '/home';
-  final String breakfastText;
-  final String lunchText;
-  final String dinnerText;
+  final int amount;
   const HomePage({
     Key key,
-    this.breakfastText,
-    this.lunchText,
-    this.dinnerText,
+    this.amount,
   }) : super(key: key);
 
   @override
@@ -74,7 +71,12 @@ class _HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 30),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Meals()),
+                        );
+                      },
                     ),
                   ],
                 ));
