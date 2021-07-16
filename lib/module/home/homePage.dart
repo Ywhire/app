@@ -27,8 +27,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   var _userid = FirebaseAuth.instance.currentUser.uid;
 
-
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -44,7 +42,8 @@ class _HomePageState extends State<HomePage> {
             Card(
               margin: const EdgeInsets.fromLTRB(0, 8, 0, 8),
               elevation: 8,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
               child: Column(
                 children: [
                   Divider(
@@ -60,48 +59,58 @@ class _HomePageState extends State<HomePage> {
                   Divider(
                     height: 0,
                     thickness: 1,
-                  ),/*
+                  ),
                   StreamBuilder<QuerySnapshot>(
-                      stream: FirebaseFirestore.instance.collection('users').doc(_userid).collection('meals').doc('breakfast').collection('meal').snapshots(),
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(_userid)
+                          .collection('meals')
+                          .doc('breakfast')
+                          .collection('meal')
+                          .snapshots(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (!snapshot.hasData) return new Text('Loading...');
-                        List<DocumentSnapshot> listofDocSnap = snapshot.data.docs;
+                        List<DocumentSnapshot> listofDocSnap =
+                            snapshot.data.docs;
                         if (listofDocSnap.length == 0) {
                           return Text(
                             "",
                           );
                         }
                         return ListView.builder(
+                          shrinkWrap: true,
                           itemCount: listofDocSnap.length,
                           itemBuilder: (context, index) {
                             return Card(
                               child: ListTile(
                                   title: Row(
-                                    children: [
-                                      Text(
-                                        listofDocSnap[index].data()['name'] == null
-                                            ? ""
-                                            : listofDocSnap[index].data()['name'],
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                      Spacer(),
-                                      Text(
-                                        "${listofDocSnap[index].data()['amount'].toString()}g",
-                                        style: TextStyle(fontSize: 20),
-                                      ),
-                                    ],
-                                  )),
+                                children: [
+                                  Text(
+                                    listofDocSnap[index].data()['name'] == null
+                                        ? ""
+                                        : listofDocSnap[index].data()['name'],
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    "${listofDocSnap[index].data()['amount'].toString()}g",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              )),
                             );
                           },
                         );
-                      }),*/
+                      }),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Meals(whichMeal: "breakfast")),
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    Meals(whichMeal: "breakfast")),
                           );
                         },
                         child: Text("Add food")),
@@ -112,7 +121,8 @@ class _HomePageState extends State<HomePage> {
             Card(
               margin: const EdgeInsets.fromLTRB(0, 9, 0, 8),
               elevation: 8,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
               child: Column(
                 children: [
                   // Add item to the lunch part
@@ -126,13 +136,58 @@ class _HomePageState extends State<HomePage> {
                     height: 0,
                     thickness: 1,
                   ),
+                  StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(_userid)
+                          .collection('meals')
+                          .doc('lunch')
+                          .collection('meal')
+                          .snapshots(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (!snapshot.hasData) return new Text('Loading...');
+                        List<DocumentSnapshot> listofDocSnap =
+                            snapshot.data.docs;
+                        if (listofDocSnap.length == 0) {
+                          return Text(
+                            "",
+                          );
+                        }
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: listofDocSnap.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: ListTile(
+                                  title: Row(
+                                children: [
+                                  Text(
+                                    listofDocSnap[index].data()['name'] == null
+                                        ? ""
+                                        : listofDocSnap[index].data()['name'],
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    "${listofDocSnap[index].data()['amount'].toString()}g",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              )),
+                            );
+                          },
+                        );
+                      }),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Meals(whichMeal: "lunch",)),
+                            MaterialPageRoute(
+                                builder: (context) => Meals(
+                                      whichMeal: "lunch",
+                                    )),
                           );
                         },
                         child: Text("Add food")),
@@ -143,10 +198,11 @@ class _HomePageState extends State<HomePage> {
             Card(
               margin: const EdgeInsets.fromLTRB(0, 9, 0, 8),
               elevation: 8,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(0)),
               child: Column(
                 children: [
-                  // Add item to the lunch part
+                  // Add item to the dinner part
                   ListTile(
                     title: Text(
                       'Dinner',
@@ -157,13 +213,58 @@ class _HomePageState extends State<HomePage> {
                     height: 0,
                     thickness: 1,
                   ),
+                  StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(_userid)
+                          .collection('meals')
+                          .doc('dinner')
+                          .collection('meal')
+                          .snapshots(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (!snapshot.hasData) return new Text('Loading...');
+                        List<DocumentSnapshot> listofDocSnap =
+                            snapshot.data.docs;
+                        if (listofDocSnap.length == 0) {
+                          return Text(
+                            "",
+                          );
+                        }
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: listofDocSnap.length,
+                          itemBuilder: (context, index) {
+                            return Card(
+                              child: ListTile(
+                                  title: Row(
+                                children: [
+                                  Text(
+                                    listofDocSnap[index].data()['name'] == null
+                                        ? ""
+                                        : listofDocSnap[index].data()['name'],
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    "${listofDocSnap[index].data()['amount'].toString()}g",
+                                    style: TextStyle(fontSize: 20),
+                                  ),
+                                ],
+                              )),
+                            );
+                          },
+                        );
+                      }),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Meals(whichMeal: "dinner",)),
+                            MaterialPageRoute(
+                                builder: (context) => Meals(
+                                      whichMeal: "dinner",
+                                    )),
                           );
                         },
                         child: Text("Add food")),
@@ -177,5 +278,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-

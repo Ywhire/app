@@ -42,7 +42,7 @@ class _MealState extends State<Meals> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Adding for "),
+        title: Text("Add Meal/"),
       ),
       body: ViewingStock(
         uid: userId,
