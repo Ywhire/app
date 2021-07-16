@@ -107,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ],
                 ),
-              ),
+              ),/*
               Card(
                 elevation: 10,
                 margin: const EdgeInsets.fromLTRB(0, 1, 0, 8),
@@ -139,7 +139,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ),
                   ],
                 ),
-              ),
+              ),*/
             ],
           ),
         )

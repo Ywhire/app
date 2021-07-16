@@ -96,7 +96,6 @@ class _StockListState extends State<StockList> {
     return new StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('kitchen').doc(uAddress).collection('items').snapshots(),
         builder: (BuildContext context, AsyncSnapshot snapshot){
-
           if(!snapshot.hasData) return new Center(child: CircularProgressIndicator());
           List<DocumentSnapshot> listofDocSnap = snapshot.data.docs;
           if(listofDocSnap.length == 0){
@@ -110,16 +109,26 @@ class _StockListState extends State<StockList> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailsScreen(int.parse(listofDocSnap[index].id.toString()), int.parse(listofDocSnap[index].data()['amount'].toString()))));
               },
                 child: Card(
-                  child: ListTile(
-                      title: Row(
-                        children: [
-                          Text(listofDocSnap[index].data()['name']==null?"":listofDocSnap[index].data()['name'],
-                            style: TextStyle(fontSize: 20),),
-                          Spacer(),
-                          Text("${listofDocSnap[index].data()['amount'].toString()}g",
-                            style: TextStyle(fontSize: 20),),
-                        ],
-                      )
+                  margin: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+                  child: Column(
+                    children: [
+                      ListTile(
+                          title: Row(
+                            children: [
+                              Text(listofDocSnap[index].data()['name']==null?"":listofDocSnap[index].data()['name'],
+                                style: TextStyle(fontSize: 20),),
+                              Spacer(),
+                              Text("${listofDocSnap[index].data()['amount'].toString()}g",
+                                style: TextStyle(fontSize: 20),),
+                            ],
+                          )
+                      ),
+                      Divider(
+                        height: 0,
+                        thickness: 1,
+                      ),
+                    ],
                   ),
                 ),
               );

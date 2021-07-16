@@ -38,6 +38,8 @@ dependencies:
   flutter_vector_icons: ^0.2.1
   firebase_core: "^0.7.0"
   firebase_auth: "^0.20.1"
+  firebase_messaging: ^6.0.16
+  flutter_local_notifications: ^1.4.4
   cloud_firestore: "^0.16.0"
   clay_containers: ^0.3.2
 

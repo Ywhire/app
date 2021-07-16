@@ -10,8 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class Meals extends StatefulWidget {
+  final String whichMeal;
   const Meals({
     Key key,
+    this.whichMeal,
   }) : super(key: key);
 
   @override
@@ -20,6 +22,7 @@ class Meals extends StatefulWidget {
 
 class _MealState extends State<Meals> {
   String userId;
+  String prefMeal;
 
   Future<void> initializeFlutterFire() async {
     await Firebase.initializeApp();
@@ -30,6 +33,7 @@ class _MealState extends State<Meals> {
     initializeFlutterFire();
     setState(() {
       userId = FirebaseAuth.instance.currentUser.uid;
+      prefMeal = widget.whichMeal;
     });
     super.initState();
   }
@@ -38,16 +42,20 @@ class _MealState extends State<Meals> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Meals"),
+        title: Text("Adding for "),
       ),
-      body: ViewingStock(userId),
+      body: ViewingStock(
+        uid: userId,
+        whichMeal: prefMeal,
+      ),
     );
   }
 }
 
 class ViewingStock extends StatefulWidget {
+  final String whichMeal;
   final String uid;
-  ViewingStock(this.uid);
+  const ViewingStock({Key key, this.uid, this.whichMeal}) : super(key: key);
 
   @override
   _ViewingStockState createState() => _ViewingStockState();
@@ -60,6 +68,7 @@ class _ViewingStockState extends State<ViewingStock> {
   String itemName;
   int amount;
   var itemid;
+  String meal;
 
   Future<void> fetchData() async {
     var document = FirebaseFirestore.instance.collection('users').doc(uId);
@@ -75,6 +84,7 @@ class _ViewingStockState extends State<ViewingStock> {
   void initState() {
     setState(() {
       uId = widget.uid;
+      meal = widget.whichMeal;
     });
     fetchData();
     super.initState();
@@ -167,6 +177,16 @@ class _ViewingStockState extends State<ViewingStock> {
                     ScaffoldMessenger.of(context).showSnackBar(dispose);
                     amount = value;
                     updateItems();
+                    setState(() {
+                      FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(uId)
+                          .collection('meals')
+                          .doc(meal)
+                          .collection('meal')
+                          .doc(itemid)
+                          .set({'name': itemName, 'amount': amount});
+                    });
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   });
