@@ -191,8 +191,9 @@ class _LoadingPageState extends State<LoadingPage> {
     setState(() {
       if (widget.baseAmount < widget.amount) {
         cAmount = 0;
-      } else {}
-      cAmount = widget.baseAmount - widget.amount;
+      } else {
+        cAmount = widget.baseAmount - widget.amount;
+      }
     });
 
     FirebaseFirestore.instance
