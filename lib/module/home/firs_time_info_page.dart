@@ -24,10 +24,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
   int weight;
 
   Future<void> passInfoToDb(userId) async {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc('$userId')
-        .set({
+    FirebaseFirestore.instance.collection('users').doc('$userId').set({
       'name': name,
       'surname': surname,
       'address': address,
@@ -43,7 +40,8 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
         .collection('kitchen')
         .doc('$address')
         .collection('items')
-        .doc('create').set({'first': 0});
+        .doc('create')
+        .set({'first': 0});
   }
 
   Future<void> initializeFlutterFire() async {
@@ -63,7 +61,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
       appBar: AppBar(
         title: Text("Add User Info"),
       ),
-      body:SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Container(
           child: Form(
             key: _formKey,
@@ -71,7 +69,8 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
                   child: TextFormField(
                     validator: (val) => val.isEmpty ? "Enter your name" : null,
                     onChanged: (val) {
@@ -88,9 +87,11 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
                   child: TextFormField(
-                    validator: (val) => val.isEmpty ? "Enter your surname" : null,
+                    validator: (val) =>
+                        val.isEmpty ? "Enter your surname" : null,
                     onChanged: (val) {
                       setState(() {
                         surname = val;
@@ -105,9 +106,11 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
                   child: TextFormField(
-                    validator: (val) => val.isEmpty ? "Enter your address" : null,
+                    validator: (val) =>
+                        val.isEmpty ? "Enter your address" : null,
                     onChanged: (val) {
                       setState(() {
                         address = val;
@@ -122,7 +125,8 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
                   child: TextFormField(
                     keyboardType: TextInputType.number,
                     validator: (val) => val.isEmpty ? "Enter your age" : null,
@@ -140,10 +144,12 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    validator: (val) => val.isEmpty ? "Enter your height" : null,
+                    validator: (val) =>
+                        val.isEmpty ? "Enter your height" : null,
                     onChanged: (val) {
                       setState(() {
                         height = int.parse(val);
@@ -158,10 +164,12 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+                  padding:
+                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
                   child: TextFormField(
                     keyboardType: TextInputType.number,
-                    validator: (val) => val.isEmpty ? "Enter your weight" : null,
+                    validator: (val) =>
+                        val.isEmpty ? "Enter your weight" : null,
                     onChanged: (val) {
                       setState(() {
                         weight = int.parse(val);
@@ -193,9 +201,7 @@ class _CreateUserInfoState extends State<CreateUserInfo> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()
-                              )
-                          );
+                                  builder: (context) => HomePage()));
                         }
                       },
                       child: const Text("Save"),
