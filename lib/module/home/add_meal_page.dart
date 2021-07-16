@@ -66,6 +66,7 @@ class ViewingStock extends StatefulWidget {
 }
 
 class _ViewingStockState extends State<ViewingStock> {
+  bool notEnough = false;
   var uId;
   var uAddress;
   int bamount;
@@ -130,18 +131,34 @@ class _ViewingStockState extends State<ViewingStock> {
     var cAmount;
     setState(() {
       if (bamount < amount) {
-        cAmount = 0;
+        setState(() {
+          notEnough = true;
+        });
       } else {
         cAmount = bamount - amount;
       }
     });
-
-    await FirebaseFirestore.instance
-        .collection('kitchen')
-        .doc(uAddress)
-        .collection('items')
-        .doc(itemid)
-        .update({'amount': cAmount});
+    if(cAmount > 0){
+      await FirebaseFirestore.instance
+          .collection('kitchen')
+          .doc(uAddress)
+          .collection('items')
+          .doc(itemid)
+          .update({'amount': cAmount});
+    }else{
+      if(cAmount == 0){
+        await FirebaseFirestore.instance
+            .collection('kitchen')
+            .doc(uAddress)
+            .collection('items')
+            .doc(itemid)
+            .delete();
+      }else {
+        setState(() {
+          notEnough = true;
+        });
+      }
+    }
   }
 
   @override
@@ -182,14 +199,16 @@ class _ViewingStockState extends State<ViewingStock> {
                     amount = value;
                     updateItems();
                     setState(() {
-                      FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(uId)
-                          .collection('meals')
-                          .doc(meal)
-                          .collection('meal')
-                          .doc(itemid)
-                          .set({'name': itemName, 'amount': amount});
+                      if(!notEnough) {
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(uId)
+                            .collection('meals')
+                            .doc(meal)
+                            .collection('meal')
+                            .doc(itemid)
+                            .set({'name': itemName, 'amount': amount});
+                      }
                     });
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
