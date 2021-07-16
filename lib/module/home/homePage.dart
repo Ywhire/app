@@ -32,22 +32,6 @@ class _HomePageState extends State<HomePage> {
     return new Scaffold(
       appBar: AppBar(
         title: Text("Diet Master"),
-        actions: [
-          TextButton.icon(
-              onPressed: () async {
-                await _auth.signOut();
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WelcomePage()));
-              },
-              icon: Icon(
-                Icons.exit_to_app,
-                color: Colors.deepOrange[600],
-              ),
-              label: Text(
-                "Signout",
-                style: TextStyle(color: Colors.black),
-              ))
-        ],
       ),
       drawer: SideDrawer(),
       body: ListView.separated(

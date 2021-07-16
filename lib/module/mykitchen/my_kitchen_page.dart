@@ -95,9 +95,10 @@ class _StockListState extends State<StockList> {
   Widget build(BuildContext context) {
     return new StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('kitchen').doc(uAddress).collection('items').snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
-          List<DocumentSnapshot> listofDocSnap = snapshot.data.docs;
+        builder: (BuildContext context, AsyncSnapshot snapshot){
+
           if(!snapshot.hasData) return new Text('Loading...');
+          List<DocumentSnapshot> listofDocSnap = snapshot.data.docs;
           if(listofDocSnap.length == 0){
             return Center(child: Text("Please add items to your stock first",
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),));
