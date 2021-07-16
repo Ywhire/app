@@ -1,3 +1,4 @@
+import 'package:app/reportAnIssuePage.dart';
 import 'package:flutter/material.dart';
 import 'package:app/routes/Routes.dart';
 
@@ -35,7 +36,14 @@ class SideDrawer extends StatelessWidget {
               onTap: () =>
                   Navigator.pushReplacementNamed(context, Routes.settings)),
           Divider(),
-          _createDrawerItem(icon: Icons.bug_report, text: 'Report an issue'),
+          _createDrawerItem(
+              icon: Icons.bug_report,
+              text: 'Report an issue',
+              onTap: () =>
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReportIssuePage()))),
           ListTile(
             title: Text('v0.0.1'),
             onTap: () {},
