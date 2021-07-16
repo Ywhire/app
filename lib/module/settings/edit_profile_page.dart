@@ -36,78 +36,75 @@ class _EditProfilePageState extends State<EditProfilePage> {
         appBar: AppBar(
           title: Text("Edit Profile"),
         ),
-        drawer: SideDrawer(),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Card(
-                margin: const EdgeInsets.fromLTRB(0, 9, 0, 8),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text("Height",style: TextStyle(fontWeight: FontWeight.w400),),
-                      onTap: (){
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Card(
+              margin: const EdgeInsets.fromLTRB(0, 9, 0, 8),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text("Height",style: TextStyle(fontWeight: FontWeight.w400),),
+                    onTap: (){
 
-                      },
-                    ),
-                    Divider(
-                      height: 0,
-                      thickness: 2,
-                    ),
-                    ListTile(
-                      title: Text("Sex",style: TextStyle(fontWeight: FontWeight.w400),),
-                      onTap: (){
+                    },
+                  ),
+                  Divider(
+                    height: 0,
+                    thickness: 2,
+                  ),
+                  ListTile(
+                    title: Text("Sex",style: TextStyle(fontWeight: FontWeight.w400),),
+                    onTap: (){
 
-                      },
-                    ),
-                    Divider(
-                      height: 0,
-                      thickness: 2,
-                    ),
-                    ListTile(
-                      title: Text("Age",style: TextStyle(fontWeight: FontWeight.w400),),
-                      onTap: (){
+                    },
+                  ),
+                  Divider(
+                    height: 0,
+                    thickness: 2,
+                  ),
+                  ListTile(
+                    title: Text("Age",style: TextStyle(fontWeight: FontWeight.w400),),
+                    onTap: (){
 
-                      },
-                    ),
-                    Divider(
-                      height: 0,
-                      thickness: 2,
-                    ),
-                    ListTile(
-                      title: Text("Location",style: TextStyle(fontWeight: FontWeight.w400),),
-                      onTap: (){
+                    },
+                  ),
+                  Divider(
+                    height: 0,
+                    thickness: 2,
+                  ),
+                  ListTile(
+                    title: Text("Location",style: TextStyle(fontWeight: FontWeight.w400),),
+                    onTap: (){
 
-                      },
-                    ),
-                    Divider(
-                      height: 0,
-                      thickness: 2,
-                    ),
-                    ListTile(
-                      title: Text("Time Zone",style: TextStyle(fontWeight: FontWeight.w400),),
-                      onTap: (){
+                    },
+                  ),
+                  Divider(
+                    height: 0,
+                    thickness: 2,
+                  ),
+                  ListTile(
+                    title: Text("Time Zone",style: TextStyle(fontWeight: FontWeight.w400),),
+                    onTap: (){
 
-                      },
-                    ),
-                    Divider(
-                      height: 0,
-                      thickness: 2,
-                    ),
-                    ListTile(
-                      title: Text("Goals",style: TextStyle(fontWeight: FontWeight.w400),),
-                      onTap: () {
+                    },
+                  ),
+                  Divider(
+                    height: 0,
+                    thickness: 2,
+                  ),
+                  ListTile(
+                    title: Text("Goals",style: TextStyle(fontWeight: FontWeight.w400),),
+                    onTap: () {
 
-                      },
-                    ),
-                  ],
-                ),
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         )
     );
   }
