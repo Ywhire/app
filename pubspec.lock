@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.2.0"
+  clay_containers:
+    dependency: "direct main"
+    description:
+      name: clay_containers
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.2"
   clock:
     dependency: transitive
     description:
@@ -272,28 +279,28 @@ packages:
       name: syncfusion_flutter_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.1.69"
+    version: "19.2.47"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.1.69"
+    version: "19.2.47"
   syncfusion_flutter_datepicker:
     dependency: transitive
     description:
       name: syncfusion_flutter_datepicker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.1.69-beta"
+    version: "19.2.47"
   table_calendar:
     dependency: "direct main"
     description:
       name: table_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.0"
+    version: "3.0.1"
   term_glyph:
     dependency: transitive
     description:
