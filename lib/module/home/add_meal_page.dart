@@ -1,5 +1,8 @@
+import 'dart:ffi';
+
 import 'package:app/module/home/homePage.dart';
 import 'package:app/module/mykitchen/my_kitchen_page.dart';
+import 'package:app/routes/Routes.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -51,10 +54,12 @@ class ViewingStock extends StatefulWidget {
 }
 
 class _ViewingStockState extends State<ViewingStock> {
-  static var uId;
-  static var uAddress;
-  static int bamount;
-  static String itemName;
+  var uId;
+  var uAddress;
+  int bamount;
+  String itemName;
+  int amount;
+  var itemid;
 
   Future<void> fetchData() async {
     var document = FirebaseFirestore.instance.collection('users').doc(uId);
@@ -75,11 +80,11 @@ class _ViewingStockState extends State<ViewingStock> {
     super.initState();
   }
 
-  static Route<Object> dialogBuilder(BuildContext context, Object arguments) {
+  Future<int> createAlertDialog(BuildContext context) {
     TextEditingController myController = TextEditingController();
-    return DialogRoute<void>(
+    return showDialog(
       context: context,
-      builder: (BuildContext context) => AlertDialog(
+      builder: (context) => AlertDialog(
         title: Text("How Much?"),
         content: TextField(
           controller: myController,
@@ -98,19 +103,31 @@ class _ViewingStockState extends State<ViewingStock> {
             elevation: 5.0,
             child: Text('Save'),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => LoadingPage(
-                        amount: int.parse(myController.text),
-                        userAdress: uAddress.toString(),
-                        uid: uId.toString(),
-                        itemid: itemName.toString(),
-                        baseAmount: bamount,
-                      )));
+              Navigator.of(context)
+                  .pop(int.parse(myController.text.toString()));
             },
           )
         ],
       ),
     );
+  }
+
+  Future<void> updateItems() async {
+    var cAmount;
+    setState(() {
+      if (bamount < amount) {
+        cAmount = 0;
+      } else {
+        cAmount = bamount - amount;
+      }
+    });
+
+    await FirebaseFirestore.instance
+        .collection('kitchen')
+        .doc(uAddress)
+        .collection('items')
+        .doc(itemid)
+        .update({'amount': cAmount});
   }
 
   @override
@@ -122,23 +139,37 @@ class _ViewingStockState extends State<ViewingStock> {
             .collection('items')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          List<DocumentSnapshot> listofDocSnap = snapshot.data.docs;
           if (!snapshot.hasData)
-            return new Text('You do not have any item in your Stock');
-          /*if(listofDocSnap.length == 0){
-            return Center(child: Text("Please add items to your stock first",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),));
-          }*/
+            return new Center(child: CircularProgressIndicator());
+          List<DocumentSnapshot> listofDocSnap = snapshot.data.docs;
+          if (listofDocSnap.length == 0) {
+            return Center(
+                child: Text(
+              "Please add items to your stock first",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ));
+          }
           return new ListView.builder(
             itemCount: listofDocSnap.length,
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
                   setState(() {
+                    itemid = listofDocSnap[index].id;
                     itemName = listofDocSnap[index].data()['name'];
                     bamount = listofDocSnap[index].data()['amount'];
                   });
-                  Navigator.of(context).restorablePush(dialogBuilder);
+                  createAlertDialog(context).then((value) {
+                    SnackBar dispose = SnackBar(
+                        content: (value == null)
+                            ? Text("No value entered")
+                            : Text("Saving $value"));
+                    ScaffoldMessenger.of(context).showSnackBar(dispose);
+                    amount = value;
+                    updateItems();
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  });
                 },
                 child: Card(
                   child: ListTile(
@@ -187,27 +218,15 @@ class LoadingPage extends StatefulWidget {
 class _LoadingPageState extends State<LoadingPage> {
   int cAmount;
 
-  Future<void> updateItems() async {
-    setState(() {
-      if (widget.baseAmount < widget.amount) {
-        cAmount = 0;
-      } else {
-        cAmount = widget.baseAmount - widget.amount;
-      }
-    });
-
-    FirebaseFirestore.instance
-        .collection('kitchen')
-        .doc('${widget.userAdress}')
-        .collection('items')
-        .doc('${widget.itemid}')
-        .update({'amount': cAmount});
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Container(
+        child: TextButton(
+          child: Icon(Icons.save),
+          onPressed: () {},
+        ),
+      ),
     );
   }
 }
