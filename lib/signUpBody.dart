@@ -13,6 +13,8 @@ class SignUpBody extends StatefulWidget {
 class _SignUpBodyState extends State<SignUpBody> {
   final Authentication _authentication = Authentication();
   final _formKey = GlobalKey<FormState>();
+  String err;
+  bool isObscure = true;
   String email = "";
   String pass = "";
   String error = "";
@@ -35,6 +37,11 @@ class _SignUpBodyState extends State<SignUpBody> {
                     email = val;
                   });
                 },
+                onTap: () {
+                  if(_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                  }
+                },
                 decoration: InputDecoration(
                     hintText: "Your Email",
                     icon: Icon(
@@ -43,26 +50,59 @@ class _SignUpBodyState extends State<SignUpBody> {
                     )),
               ),
             ),
-
             Container(
-              padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 16),
               child: TextFormField(
-                validator: (val) => val.isEmpty ? "Enter an password" : null,
+                decoration: InputDecoration(
+                    labelText: "New Password",
+                    hintText: "New Password",
+                    helperText: "6 characters minimum",
+                    errorText: this.err,
+                    icon: Icon(
+                      Icons.lock,
+                      color: Colors.deepOrange[300],
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          isObscure ? Icons.visibility_off : Icons.visibility
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          isObscure = !isObscure;
+                        });
+                      },
+                    )
+                ),
+                onTap: () {
+                  if(_formKey.currentState.validate()) {
+                    _formKey.currentState.save();
+                  }
+                },
                 onChanged: (val) {
+                  if(val.length > 5){
+                    setState(() {
+                      err = null;
+                    });
+                  }
                   setState(() {
                     pass = val;
                   });
                 },
-                decoration: InputDecoration(
-                    hintText: "Your Password",
-                    icon: Icon(
-                      Icons.lock,
-                      color: Colors.deepOrange[300],
-                    )),
+                onSaved: (val) {
+                  if(0 < val.length && val.length < 6){
+                    setState(() {
+                      err = 'Password must contain at least 6 characters.';
+                    });
+                  }
+                  else {
+                    setState(() {
+                      err = null;
+                    });
+                  }
+                },
+                obscureText: isObscure,
               ),
             ),
-
-            // sign up button
             Container(
               margin: EdgeInsets.symmetric(vertical: 20.0),
               width: size.width * 0.8,

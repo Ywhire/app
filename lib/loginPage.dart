@@ -22,6 +22,8 @@ class LoginBody extends StatefulWidget {
 class _LoginBodyState extends State<LoginBody> {
   final Authentication _authentication = Authentication();
 
+  bool isObscure = true;
+
   String email = "";
   String pass = "";
   String error = "";
@@ -59,21 +61,31 @@ class _LoginBodyState extends State<LoginBody> {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 30.0),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 16),
             child: TextFormField(
-              validator: (val) => val.isEmpty ? "Enter an password" : null,
-              onChanged: (val) {
-                setState(() {
-                  pass = val;
-                });
-                log(pass);
-              },
               decoration: InputDecoration(
                   hintText: "Your Password",
                   icon: Icon(
                     Icons.lock,
                     color: Colors.deepOrange[300],
-                  )),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                        isObscure ? Icons.visibility_off : Icons.visibility
+                    ),
+                    onPressed: (){
+                      setState(() {
+                        isObscure = !isObscure;
+                      });
+                    },
+                  )
+              ),
+              onChanged: (val) {
+                setState(() {
+                  pass = val;
+                });
+              },
+              obscureText: isObscure,
             ),
           ),
           Container(
